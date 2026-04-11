@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Quick Brake Repair">
+  <defs>
+    <linearGradient id="disc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b7b94"/>
+      <stop offset="100%" stop-color="#d7dfec"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f78ff"/>
+      <stop offset="100%" stop-color="#1239d0"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="26" fill="#0a0f17"/>
+  <circle cx="72" cy="64" r="36" fill="url(#disc)" />
+  <circle cx="72" cy="64" r="18" fill="#0a0f17" opacity=".35"/>
+  <circle cx="72" cy="64" r="6" fill="#f7fbff"/>
+  <path d="M34 24c14 0 26 18 26 40S48 104 34 104H26V24h8Z" fill="url(#accent)"/>
+  <path d="M34 24c6 7 10 19 10 40s-4 33-10 40" stroke="#f7fbff" stroke-width="3" fill="none" opacity=".9"/>
+  <g stroke="#f7fbff" stroke-width="2.5" opacity=".65">
+    <path d="M72 28v12"/>
+    <path d="M72 88v12"/>
+    <path d="M36 64h12"/>
+    <path d="M96 64h12"/>
+    <path d="M48 40l8 8"/>
+    <path d="M88 80l8 8"/>
+    <path d="M48 88l8-8"/>
+    <path d="M88 48l8-8"/>
+  </g>
+</svg>
