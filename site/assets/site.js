@@ -2,6 +2,9 @@ const menuToggle = document.querySelector(".menu-toggle");
 const siteNav = document.querySelector(".site-nav");
 const body = document.body;
 const mobileNavBreakpoint = 1100;
+const siteHeader = document.querySelector(".site-header");
+const homeHero = document.querySelector(".hero--home");
+const homeLightSection = homeHero?.nextElementSibling;
 
 const buildServicesDropdown = () => {
   if (!siteNav || siteNav.querySelector(".site-nav__group--services")) {
@@ -60,11 +63,33 @@ const closeServicesMenu = () => {
 };
 
 const syncScrolledState = () => {
+  if (body.classList.contains("page-home") && siteHeader && homeLightSection) {
+    const lightSectionTop = homeLightSection.getBoundingClientRect().top;
+    const headerThreshold = siteHeader.offsetHeight + 12;
+    body.classList.toggle("is-scrolled", lightSectionTop <= headerThreshold);
+    return;
+  }
+
   body.classList.toggle("is-scrolled", window.scrollY > 8);
 };
 
 syncScrolledState();
-window.addEventListener("scroll", syncScrolledState, { passive: true });
+
+let scrolledStateFrame = null;
+
+const requestScrolledStateSync = () => {
+  if (scrolledStateFrame !== null) {
+    return;
+  }
+
+  scrolledStateFrame = window.requestAnimationFrame(() => {
+    syncScrolledState();
+    scrolledStateFrame = null;
+  });
+};
+
+window.addEventListener("scroll", requestScrolledStateSync, { passive: true });
+window.addEventListener("resize", requestScrolledStateSync);
 
 if (menuToggle && siteNav) {
   const closeNav = () => {
