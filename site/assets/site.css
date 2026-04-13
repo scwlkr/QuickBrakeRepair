@@ -1221,6 +1221,55 @@ textarea {
   font-size: 0.94rem;
 }
 
+.page-contact .section-layout--contact-intro {
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.96fr);
+  gap: clamp(1.75rem, 3.4vw, 4rem);
+}
+
+.page-contact .contact-intro__copy {
+  display: grid;
+  align-content: start;
+}
+
+.page-contact .contact-intro__copy .section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.page-contact .contact-intro__copy .content-stack {
+  max-width: none;
+}
+
+.page-contact .contact-intro__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 12 / 8;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top right, rgba(29, 99, 255, 0.18), transparent 28%),
+    linear-gradient(180deg, #f6faff 0%, #ecf3fb 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.page-contact .contact-intro__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 17, 32, 0.02) 0%, rgba(7, 17, 32, 0.12) 100%),
+    linear-gradient(135deg, rgba(29, 99, 255, 0.08), transparent 45%);
+  pointer-events: none;
+}
+
+.page-contact .contact-intro__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1552,6 +1601,7 @@ textarea {
   .site-footer__grid,
   .section-layout,
   .page-home .section-layout--intro-visual,
+  .page-contact .section-layout--contact-intro,
   .article-layout,
   .service-grid,
   .page-home .service-pane__layout {
@@ -1568,8 +1618,13 @@ textarea {
   }
 
   .page-home .section-visual--intro,
-  .page-home .service-pane__visual {
+  .page-home .service-pane__visual,
+  .page-contact .contact-intro__media {
     max-width: 32rem;
+  }
+
+  .page-contact .section-layout--contact-intro {
+    gap: 1.5rem;
   }
 
   .hero__art-rotor {
@@ -1634,7 +1689,8 @@ textarea {
   }
 
   .page-home .section-visual--intro,
-  .page-home .service-pane__visual {
+  .page-home .service-pane__visual,
+  .page-contact .contact-intro__media {
     max-width: none;
   }
 
