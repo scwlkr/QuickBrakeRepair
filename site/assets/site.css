@@ -1239,6 +1239,13 @@ textarea {
   max-width: none;
 }
 
+.page-contact .hero .button--secondary {
+  color: var(--brand-deep);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(8, 26, 55, 0.12);
+  box-shadow: 0 14px 28px rgba(8, 26, 55, 0.08);
+}
+
 .page-contact .contact-intro__media {
   position: relative;
   width: 100%;
