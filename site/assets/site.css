@@ -1694,6 +1694,12 @@ textarea {
     max-width: none;
   }
 
+  .page-contact .contact-intro__media {
+    width: min(92%, 24rem);
+    justify-self: center;
+    margin-inline: auto;
+  }
+
   .hero-stats,
   .card-grid--two,
   .card-grid--three,
