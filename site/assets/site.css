@@ -1177,17 +1177,32 @@ textarea {
 }
 
 .page-home .section-visual__frame {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 11 / 10;
   border-radius: calc(var(--radius-lg) - 10px);
   background: linear-gradient(180deg, #0d2144 0%, #081834 100%);
 }
 
-.page-home .section-visual__frame img {
+.page-home .section-visual__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 17, 32, 0.08) 0%, rgba(7, 17, 32, 0.28) 100%),
+    linear-gradient(135deg, rgba(29, 99, 255, 0.08), transparent 48%);
+  pointer-events: none;
+}
+
+.page-home .section-visual__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.page-home .section-visual__image--intro {
+  object-position: center center;
 }
 
 .page-home .section-visual__caption {
@@ -1240,11 +1255,7 @@ textarea {
 
 .page-home .service-pane__visual {
   position: relative;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: 0.85rem;
   aspect-ratio: 1 / 1;
-  padding: 1rem;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius-lg) - 6px);
@@ -1256,30 +1267,32 @@ textarea {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.08) 100%),
-    linear-gradient(rgba(8, 26, 55, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8, 26, 55, 0.04) 1px, transparent 1px);
-  background-size: auto, 100% 3.85rem, 3.85rem 100%;
+    linear-gradient(180deg, rgba(7, 17, 32, 0.02) 0%, rgba(7, 17, 32, 0.48) 100%),
+    linear-gradient(135deg, rgba(29, 99, 255, 0.16), transparent 52%);
   pointer-events: none;
 }
 
-.page-home .service-pane__visual img,
+.page-home .service-pane__image,
 .page-home .service-pane__visual figcaption {
   position: relative;
   z-index: 1;
 }
 
-.page-home .service-pane__visual img {
+.page-home .service-pane__image {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  align-self: center;
+  object-fit: cover;
+  display: block;
 }
 
 .page-home .service-pane__visual figcaption {
-  justify-self: start;
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 0.48rem 0.82rem;
   border-radius: 999px;
   font-size: 0.74rem;
@@ -1294,15 +1307,21 @@ textarea {
     linear-gradient(180deg, #f8fbff 0%, #edf3fb 100%);
 }
 
-.page-home .service-pane__visual--premium img {
-  transform: scale(1.06) rotate(-8deg);
-  filter: drop-shadow(0 14px 32px rgba(8, 26, 55, 0.12));
+.page-home .service-pane__visual--premium::before {
+  background:
+    linear-gradient(180deg, rgba(7, 17, 32, 0.02) 0%, rgba(7, 17, 32, 0.54) 100%),
+    linear-gradient(135deg, rgba(29, 99, 255, 0.24), transparent 50%);
+}
+
+.page-home .service-pane__image--premium {
+  object-position: center center;
 }
 
 .page-home .service-pane__visual--premium figcaption {
-  color: var(--brand-deep);
-  border: 1px solid rgba(29, 99, 255, 0.16);
-  background: rgba(255, 255, 255, 0.92);
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(7, 17, 32, 0.46);
+  backdrop-filter: blur(10px);
 }
 
 .page-home .service-pane__visual--standard {
@@ -1311,24 +1330,15 @@ textarea {
     linear-gradient(180deg, #0c1f42 0%, #081935 100%);
 }
 
-.page-home .service-pane__visual--standard::before {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.08) 100%),
-    linear-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
-  background-size: auto, 100% 3.85rem, 3.85rem 100%;
-  opacity: 0.42;
-}
-
-.page-home .service-pane__visual--standard img {
-  transform: scale(0.9);
-  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.24));
+.page-home .service-pane__image--standard {
+  object-position: center center;
 }
 
 .page-home .service-pane__visual--standard figcaption {
   color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(7, 17, 32, 0.44);
+  backdrop-filter: blur(10px);
 }
 
 .coverage-block {
