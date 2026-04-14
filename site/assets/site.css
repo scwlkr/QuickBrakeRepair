@@ -1333,8 +1333,8 @@ textarea {
 }
 
 .page-home .section-layout--intro-visual {
-  grid-template-columns: minmax(0, 0.86fr) minmax(14rem, 0.72fr) minmax(0, 1fr);
-  grid-template-areas: "heading badge copy";
+  grid-template-columns: minmax(14rem, 0.72fr) minmax(0, 1fr) minmax(0, 0.86fr);
+  grid-template-areas: "badge copy heading";
   gap: clamp(1.4rem, 2.8vw, 2.35rem);
 }
 
@@ -1349,6 +1349,7 @@ textarea {
 .page-home .section-layout--intro-visual .section-heading {
   grid-area: heading;
   margin-bottom: 0;
+  align-self: center;
 }
 
 .page-home .section-layout--intro-visual .content-stack {
