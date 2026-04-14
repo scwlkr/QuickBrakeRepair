@@ -1257,7 +1257,7 @@ textarea {
 
 .hero--home .hero-stats {
   display: inline-grid;
-  grid-template-columns: repeat(3, minmax(11rem, 12.35rem));
+  grid-template-columns: repeat(3, max-content);
   gap: 0;
   width: auto;
   max-width: 100%;
@@ -1272,7 +1272,9 @@ textarea {
 }
 
 .hero--home .hero-stat span {
-  max-width: 16ch;
+  max-width: none;
+  white-space: nowrap;
+  font-size: 0.88rem;
   color: rgba(255, 255, 255, 0.68);
 }
 
