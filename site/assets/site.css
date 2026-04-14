@@ -1337,6 +1337,14 @@ textarea {
   gap: clamp(1.4rem, 2.8vw, 2.35rem);
 }
 
+.page-home .section--intro {
+  padding-bottom: clamp(2.4rem, 4vw, 3.25rem);
+}
+
+.page-home .section--services {
+  padding-top: clamp(2rem, 3.6vw, 3rem);
+}
+
 .page-home .section-layout--intro-visual .section-heading {
   margin-bottom: 0;
 }
@@ -1349,7 +1357,9 @@ textarea {
   position: relative;
   display: grid;
   gap: 1rem;
+  width: min(100%, 21rem);
   min-height: 100%;
+  justify-self: end;
   padding: 1rem;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1397,6 +1407,19 @@ textarea {
   pointer-events: none;
 }
 
+.page-home .section-visual__frame--badge {
+  aspect-ratio: 1 / 1;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(29, 99, 255, 0.14), transparent 56%),
+    linear-gradient(180deg, #ffffff 0%, #eef5ff 100%);
+}
+
+.page-home .section-visual__frame--badge::after {
+  background:
+    radial-gradient(circle at center, rgba(29, 99, 255, 0.08), transparent 64%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(29, 99, 255, 0.04) 100%);
+}
+
 .page-home .section-visual__image {
   width: 100%;
   height: 100%;
@@ -1408,10 +1431,22 @@ textarea {
   object-position: center center;
 }
 
+.page-home .section-visual__image--badge {
+  object-fit: contain;
+  padding: clamp(1.5rem, 4vw, 2.2rem);
+  filter: drop-shadow(0 20px 30px rgba(20, 71, 186, 0.12));
+}
+
 .page-home .section-visual__caption {
   display: grid;
   gap: 0.3rem;
   padding: 0 0.15rem 0.1rem;
+}
+
+.page-home .section-visual--badge .section-visual__caption {
+  justify-items: center;
+  text-align: center;
+  padding-inline: 0.35rem;
 }
 
 .page-home .section-visual__caption strong {
@@ -1851,6 +1886,11 @@ textarea {
     max-width: 32rem;
   }
 
+  .page-home .section-visual--intro {
+    width: min(100%, 24rem);
+    justify-self: start;
+  }
+
   .page-contact .section-layout--contact-intro {
     gap: 1.5rem;
   }
@@ -1933,6 +1973,10 @@ textarea {
   .page-home .service-pane__visual,
   .page-contact .contact-intro__media {
     max-width: none;
+  }
+
+  .page-home .section-visual--intro {
+    width: 100%;
   }
 
   .page-contact .contact-intro__media {
