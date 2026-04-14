@@ -492,10 +492,35 @@ textarea {
   gap: 0.3rem;
 }
 
+.hero--home .hero-stat {
+  grid-template-rows: auto 1fr;
+  gap: 0.45rem;
+}
+
 .hero-stat strong {
   font-family: "Sora", sans-serif;
   font-size: 1rem;
   letter-spacing: -0.04em;
+}
+
+.hero--home .hero-stat strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero--home .hero-stat strong::before {
+  content: "✓";
+  display: inline-grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  color: #4ef0a4;
+  background: rgba(78, 240, 164, 0.14);
+  box-shadow: 0 0 0 1px rgba(78, 240, 164, 0.18);
+  font-size: 0.78rem;
+  line-height: 1;
 }
 
 .hero-stat span {
@@ -1231,13 +1256,18 @@ textarea {
 }
 
 .hero--home .hero-stats {
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.22fr) minmax(0, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding-top: 1.5rem;
   border-top-color: rgba(255, 255, 255, 0.18);
 }
 
 .hero--home .hero-stat span {
+  max-width: none;
   color: rgba(255, 255, 255, 0.68);
+}
+
+.hero--home .hero-stat:first-child {
+  margin-left: clamp(0.9rem, 1.3vw, 1.45rem);
 }
 
 .hero__support {
