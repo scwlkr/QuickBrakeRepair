@@ -331,18 +331,34 @@ function renderContact(page, site) {
   return `
     <section class="hero">
       <div class="shell hero__grid">
-        <div class="hero__content">
-          <h1>${escapeHtml(page.hero.title)}</h1>
-          <p class="hero__summary">${escapeHtml(page.hero.summary)}</p>
-          <div class="hero__actions">
-            <a class="button button--primary" href="${escapeHtml(site.phoneHref)}">Call Now</a>
-            <a class="button button--secondary" href="#contact-request">Request a Quote</a>
+        <div class="contact-hero__primary">
+          <div class="hero__content">
+            <h1>${escapeHtml(page.hero.title)}</h1>
+            <p class="hero__summary">${escapeHtml(page.hero.summary)}</p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="${escapeHtml(site.phoneHref)}">Call Now</a>
+              <a class="button button--secondary" href="#contact-request">Request a Quote</a>
+            </div>
+            ${renderHeroStats([
+              { value: "Free quote", label: "before scheduling" },
+              { value: "Mon - Sat", label: "8:00 am - 7:00 pm" },
+              { value: "Mobile-first", label: "appointments at your location" },
+            ])}
           </div>
-          ${renderHeroStats([
-            { value: "Free quote", label: "before scheduling" },
-            { value: "Mon - Sat", label: "8:00 am - 7:00 pm" },
-            { value: "Mobile-first", label: "appointments at your location" },
-          ])}
+          <article class="card card--contact-direct">
+            <h2>Talk to Quick Brake Repair</h2>
+            <ul class="contact-list contact-list--direct">
+              <li><strong>Call</strong><a href="${escapeHtml(site.phoneHref)}">${escapeHtml(site.phoneDisplay)}</a></li>
+              <li><strong>Email</strong><ul class="footer-list">${site.emails
+                .map(
+                  (email) =>
+                    `<li><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></li>`,
+                )
+                .join("")}</ul></li>
+              <li><strong>Location</strong><span>${escapeHtml(`${site.city} ${site.postalCode}`)}</span></li>
+              <li><strong>Hours</strong><span>Mon - Sat: 8:00 am - 7:00 pm<br>Sunday: Closed</span></li>
+            </ul>
+          </article>
         </div>
         <aside id="contact-request" class="card hero-form-card" aria-labelledby="contact-request-heading">
           <span class="eyebrow">Request a quote</span>
@@ -364,20 +380,6 @@ function renderContact(page, site) {
             <button class="button button--primary contact-form__submit" type="submit">Send Request</button>
           </form>
         </aside>
-        <article class="card card--contact-direct">
-          <h2>Talk to Quick Brake Repair</h2>
-          <ul class="contact-list contact-list--direct">
-            <li><strong>Call</strong><a href="${escapeHtml(site.phoneHref)}">${escapeHtml(site.phoneDisplay)}</a></li>
-            <li><strong>Email</strong><ul class="footer-list">${site.emails
-              .map(
-                (email) =>
-                  `<li><a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></li>`,
-              )
-              .join("")}</ul></li>
-            <li><strong>Location</strong><span>${escapeHtml(`${site.city} ${site.postalCode}`)}</span></li>
-            <li><strong>Hours</strong><span>Mon - Sat: 8:00 am - 7:00 pm<br>Sunday: Closed</span></li>
-          </ul>
-        </article>
       </div>
     </section>
     <section class="content-section shell section--contact-intro">
