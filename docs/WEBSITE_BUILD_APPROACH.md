@@ -1,5 +1,13 @@
 # QBR - Your Optimal Build Approach
 
+Current repo note
+
+The project now uses a source-driven static build:
+
+* edit content, templates, styles, and scripts under `src/`
+* run `npm run build`
+* publish the generated root output for GitHub Pages / static hosting / optional WordPress upload
+
 Core Decision
 
 You should NOT build a WordPress theme from scratch.

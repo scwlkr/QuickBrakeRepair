@@ -11,3 +11,4 @@ old-website-refrence/
 node_modules/
 test-results/
 playwright-report/
+.generated-site/

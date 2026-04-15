@@ -1,0 +1,133 @@
+.hero {
+  padding: 4.5rem 0 3rem;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 23rem);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.hero__content {
+  display: grid;
+  align-content: start;
+  gap: 1.2rem;
+}
+
+.hero__summary {
+  max-width: 60ch;
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--text-soft);
+}
+
+.hero__actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.hero-stat {
+  display: grid;
+  align-content: start;
+  gap: 0.3rem;
+}
+
+.hero--home .hero-stat {
+  grid-template-rows: auto 1fr;
+  gap: 0.45rem;
+}
+
+.hero-stat strong {
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  letter-spacing: -0.04em;
+}
+
+.hero--home .hero-stat strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero--home .hero-stat strong::before {
+  content: "✓";
+  display: inline-grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  color: #4ef0a4;
+  background: rgba(78, 240, 164, 0.14);
+  box-shadow: 0 0 0 1px rgba(78, 240, 164, 0.18);
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.hero-stat span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  max-width: 22ch;
+}
+
+.hero-card {
+  padding: 1.6rem;
+  border-radius: var(--radius-lg);
+  color: var(--white);
+  background: linear-gradient(180deg, var(--surface-dark) 0%, var(--surface-dark-strong) 100%);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-card .brand-mark {
+  margin-bottom: 1rem;
+}
+
+.hero-card__copy strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+
+.hero-card__copy p,
+.hero-card__facts dd {
+  margin: 0.75rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-card__facts {
+  display: grid;
+  gap: 0.9rem;
+  margin: 1.4rem 0 0;
+}
+
+.hero-card__facts div {
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.hero-card__facts dt {
+  margin-bottom: 0.2rem;
+  color: rgba(167, 197, 255, 0.88);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.hero-card__facts dd {
+  margin: 0;
+}
+
+.hero-card__facts a {
+  color: var(--white);
+}

@@ -67,10 +67,12 @@ If replacing the hero media in the future:
 ## 5. Technical Guidance
 
 - Prefer static HTML/CSS/JS.
-- The published site now lives at the repository root, not under `site/`.
+- The publishable site lives at the repository root, not under `site/`.
+- The authoring source of truth lives under `src/`, and `npm run build` regenerates the root output.
 - Because GitHub Pages branch deploys this repo at a project path, prefer relative page and asset links over root-relative paths.
-- Shared design changes should flow through [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css).
-- Shared behavior should live in [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js).
+- Shared design changes should flow through [`src/styles/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/styles) and emit to [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css).
+- Shared behavior should live in [`src/scripts/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/scripts) and emit to [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js).
+- Page content should come from [`src/data/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/data), with shared chrome and page families rendered from [`src/partials/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/partials) and [`src/templates/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/templates).
 - Use page-specific classes only where shared abstractions become too broad.
 
 ## 6. Verification Standard
@@ -78,6 +80,7 @@ If replacing the hero media in the future:
 At minimum, after UI changes:
 
 ```bash
+npm run build
 git diff --check
 node --check assets/site.js
 python3 -m http.server 4173 --directory ..
@@ -110,3 +113,4 @@ Avoid spending time on:
 - headless WordPress complexity
 - design churn that weakens brand consistency
 - wholesale copy rewrites that jeopardize SEO
+- bypassing `src/` and hand-editing generated root pages for normal feature work

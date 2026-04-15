@@ -1,0 +1,2 @@
+syncContactFormStatus();
+initializeRevealMotion();

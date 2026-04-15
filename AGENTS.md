@@ -5,7 +5,8 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 ## Project Overview
 
 - This repo is a static website build for `quickbrakerepair.com`.
-- The published site now lives directly at the repository root in plain `HTML/CSS/JS`.
+- The published site lives directly at the repository root in plain `HTML/CSS/JS`.
+- The authoring source of truth now lives under [`src/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src), and `npm run build` regenerates the publishable root files.
 - WordPress is treated as optional hosting/integration infrastructure, not the primary implementation surface.
 - GitHub Pages branch deploys publish from `main` + `/(root)`, so internal page and asset links should stay relative, not root-relative.
 
@@ -24,9 +25,13 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 ## Current Site Structure
 
-- Homepage: [`index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/index.html)
-- Shared styles: [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css)
-- Shared interactions: [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js)
+- Authoring content/data: [`src/data/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/data)
+- Authoring templates/partials: [`src/templates/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/templates) and [`src/partials/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/partials)
+- Authoring styles/scripts: [`src/styles/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/styles) and [`src/scripts/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/scripts)
+- Build entrypoint: [`scripts/build.mjs`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/scripts/build.mjs)
+- Published homepage: [`index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/index.html)
+- Published shared styles: [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css)
+- Published shared interactions: [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js)
 - Core pages:
   - [`contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/contact/index.html)
   - [`areas-we-serve/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/areas-we-serve/index.html)
@@ -54,7 +59,9 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 ## Editing Rules
 
-- Use shared CSS for consistent cross-page changes.
+- Do not hand-edit generated root HTML unless the user explicitly asks for a publish-only hotfix.
+- Make structural, content, or shared UI changes in `src/`, then run `npm run build`.
+- Use shared authored CSS/JS modules in `src/styles/` and `src/scripts/` for consistent cross-page changes.
 - Keep page-specific classes scoped and intentional.
 - Avoid introducing frameworks.
 - Keep assets local when possible.
@@ -64,8 +71,9 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 After meaningful UI changes:
 
-1. Run `git diff --check`
-2. Run `node --check assets/site.js`
+1. Run `npm run build`
+2. Run `git diff --check`
+3. Run `node --check assets/site.js`
 3. Serve locally with:
    ```bash
    python3 -m http.server 4173 --directory ..
@@ -78,7 +86,9 @@ After meaningful UI changes:
 
 ```bash
 rg --files | sed -n '1,200p'
-sed -n '1,260p' index.html
+npm run build
+sed -n '1,260p' src/data/index.mjs
+sed -n '1,260p' src/templates/renderers.mjs
 sed -n '1,260p' assets/site.css
 node --check assets/site.js
 python3 -m http.server 4173 --directory ..

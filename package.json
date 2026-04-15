@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "bun scripts/dev.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "verify": "node scripts/verify.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1"

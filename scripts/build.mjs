@@ -1,3 +1,27 @@
-console.log(
-  "The publishable site now lives at repository root. Edit the root HTML/CSS/JS files directly; the legacy src/ generator is not the deployment source.",
-);
+import path from "node:path";
+
+import { buildSite } from "./lib/build-site.mjs";
+
+function getOutDirArg(argv) {
+  const outDirFlagIndex = argv.indexOf("--out-dir");
+
+  if (outDirFlagIndex === -1) {
+    return process.cwd();
+  }
+
+  const outDirValue = argv[outDirFlagIndex + 1];
+
+  if (!outDirValue) {
+    throw new Error("Missing value for --out-dir.");
+  }
+
+  return path.resolve(process.cwd(), outDirValue);
+}
+
+const outDir = getOutDirArg(process.argv.slice(2));
+const summary = await buildSite({
+  rootDir: process.cwd(),
+  outDir,
+});
+
+console.log(`Built ${summary.pages} pages into ${summary.output}`);
