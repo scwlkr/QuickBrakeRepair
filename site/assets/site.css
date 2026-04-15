@@ -1860,6 +1860,7 @@ textarea {
   .site-nav__group.is-open .site-nav__dropdown {
     max-height: 12rem;
     padding-top: 0.2rem;
+    transform: none;
   }
 
   .site-nav__dropdown .site-nav__link,
