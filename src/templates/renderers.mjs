@@ -355,18 +355,18 @@ function renderContact(page, site) {
             <input type="hidden" name="_template" value="${escapeHtml(site.contactForm.template)}">
             <input type="hidden" name="_next" value="${escapeHtml(statusNextUrl)}">
             <label class="form-honeypot" aria-hidden="true"><span>Leave this field empty</span><input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
-            <label><span>Name</span><input type="text" name="name" required></label>
-            <label><span>Phone</span><input type="tel" name="phone" required></label>
-            <label><span>Email</span><input type="email" name="email" required></label>
-            <label><span>Vehicle</span><input type="text" name="vehicle" placeholder="Year, make, model"></label>
-            <label><span>Service location</span><input type="text" name="service_location" placeholder="City or address"></label>
-            <label><span>What are you noticing?</span><textarea name="symptoms" rows="5" placeholder="Noise, pulling, warning light, soft pedal, grinding, etc."></textarea></label>
-            <button class="button button--primary" type="submit">Send Request</button>
+            <label class="contact-form__field"><span>Name</span><input type="text" name="name" required></label>
+            <label class="contact-form__field"><span>Phone</span><input type="tel" name="phone" required></label>
+            <label class="contact-form__field"><span>Email</span><input type="email" name="email" required></label>
+            <label class="contact-form__field"><span>Vehicle</span><input type="text" name="vehicle" placeholder="Year, make, model"></label>
+            <label class="contact-form__field contact-form__field--full"><span>Service location</span><input type="text" name="service_location" placeholder="City or address"></label>
+            <label class="contact-form__field contact-form__field--full"><span>What are you noticing?</span><textarea name="symptoms" rows="5" placeholder="Noise, pulling, warning light, soft pedal, grinding, etc."></textarea></label>
+            <button class="button button--primary contact-form__submit" type="submit">Send Request</button>
           </form>
         </aside>
         <article class="card card--contact-direct">
           <h2>Talk to Quick Brake Repair</h2>
-          <ul class="contact-list">
+          <ul class="contact-list contact-list--direct">
             <li><strong>Call</strong><a href="${escapeHtml(site.phoneHref)}">${escapeHtml(site.phoneDisplay)}</a></li>
             <li><strong>Email</strong><ul class="footer-list">${site.emails
               .map(

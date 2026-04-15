@@ -1979,6 +1979,18 @@ textarea {
 
 .page-contact .hero-form-card .contact-form {
   margin-top: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 0.85rem;
+}
+
+.page-contact .hero-form-card .form-honeypot,
+.page-contact .hero-form-card .contact-form__field--full,
+.page-contact .hero-form-card .contact-form__submit {
+  grid-column: 1 / -1;
+}
+
+.page-contact .hero-form-card .contact-form textarea {
+  min-height: 8.75rem;
 }
 
 .page-contact .hero-form-card .button {
@@ -1990,8 +2002,43 @@ textarea {
   grid-column: 1;
   grid-row: 2;
   align-self: start;
-  max-width: 26rem;
-  margin-top: clamp(0.25rem, 1.6vw, 1rem);
+  max-width: none;
+  margin-top: clamp(0.5rem, 1.8vw, 1.1rem);
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  gap: 1rem clamp(1.4rem, 2vw, 2.2rem);
+  padding: clamp(1.35rem, 1.9vw, 1.7rem);
+  border-color: rgba(8, 26, 55, 0.09);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(245, 249, 255, 0.96) 100%);
+}
+
+.page-contact .card--contact-direct h2 {
+  margin: 0;
+  max-width: 12rem;
+  font-size: clamp(2.25rem, 4vw, 3.35rem);
+  line-height: 0.94;
+}
+
+.page-contact .contact-list--direct {
+  margin: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem clamp(1rem, 1.6vw, 1.6rem);
+}
+
+.page-contact .contact-list--direct li {
+  min-width: 0;
+  gap: 0.35rem;
+}
+
+.page-contact .contact-list--direct .footer-list {
+  margin: 0.08rem 0 0;
+  gap: 0.25rem;
+}
+
+.page-contact .contact-list--direct a,
+.page-contact .contact-list--direct span {
+  overflow-wrap: anywhere;
 }
 
 .page-contact .section--contact-intro {
@@ -2237,6 +2284,20 @@ textarea {
     grid-row: auto;
     max-width: none;
     margin-top: 0;
+  }
+
+  .page-contact .hero-form-card {
+    order: -1;
+  }
+
+  .page-contact .hero-form-card .contact-form,
+  .page-contact .card--contact-direct,
+  .page-contact .contact-list--direct {
+    grid-template-columns: 1fr;
+  }
+
+  .page-contact .card--contact-direct h2 {
+    max-width: none;
   }
 
   .page-home .section-visual--intro {

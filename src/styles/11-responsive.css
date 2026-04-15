@@ -188,6 +188,20 @@
     margin-top: 0;
   }
 
+  .page-contact .hero-form-card {
+    order: -1;
+  }
+
+  .page-contact .hero-form-card .contact-form,
+  .page-contact .card--contact-direct,
+  .page-contact .contact-list--direct {
+    grid-template-columns: 1fr;
+  }
+
+  .page-contact .card--contact-direct h2 {
+    max-width: none;
+  }
+
   .page-home .section-visual--intro {
     width: min(100%, 24rem);
     justify-self: start;
