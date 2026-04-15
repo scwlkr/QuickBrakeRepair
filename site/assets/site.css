@@ -1226,8 +1226,8 @@ textarea {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 26rem);
-  gap: clamp(2.5rem, 5vw, 5.75rem);
+  grid-template-columns: minmax(0, 1fr) minmax(26rem, 32.5rem);
+  gap: clamp(2.25rem, 4.4vw, 5.25rem);
   align-items: center;
   min-height: max(46rem, 100svh);
   padding-top: clamp(7.25rem, 11vh, 8.75rem);
@@ -1280,49 +1280,54 @@ textarea {
 
 .hero__support {
   justify-self: end;
-  width: min(100%, 26rem);
-  padding: 1.65rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: var(--radius-lg);
-  background: rgba(7, 17, 32, 0.54);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.22);
+  width: min(100%, 32.5rem);
+  padding: clamp(1.9rem, 2.2vw, 2.2rem);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: calc(var(--radius-lg) + 0.25rem);
+  background: linear-gradient(180deg, rgba(9, 22, 44, 0.74) 0%, rgba(6, 17, 33, 0.58) 100%);
+  backdrop-filter: blur(22px) saturate(120%);
+  box-shadow: 0 32px 72px rgba(0, 0, 0, 0.24);
 }
 
-.hero__support-title {
+.hero--home .hero__support-title {
   margin: 0;
   font-family: "Sora", sans-serif;
-  font-size: 1.15rem;
+  font-size: clamp(1.6rem, 1.45vw, 1.85rem);
   letter-spacing: -0.04em;
 }
 
-.hero__support-copy {
-  margin: 0.8rem 0 0;
-  color: rgba(255, 255, 255, 0.74);
+.hero--home .hero__support-copy {
+  margin: 0.9rem 0 0;
+  max-width: 26ch;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: clamp(1.16rem, 1.08vw, 1.24rem);
+  line-height: 1.64;
 }
 
-.hero__details {
+.hero--home .hero__details {
   display: grid;
-  gap: 0.9rem;
-  margin: 1.4rem 0 0;
+  gap: 1.15rem;
+  margin: 1.85rem 0 0;
 }
 
-.hero__details div {
-  padding-top: 0.9rem;
+.hero--home .hero__details div {
+  padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.hero__details dt {
-  margin-bottom: 0.22rem;
+.hero--home .hero__details dt {
+  margin-bottom: 0.28rem;
   color: rgba(167, 197, 255, 0.88);
-  font-size: 0.78rem;
+  font-size: 0.92rem;
   text-transform: uppercase;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.14em;
 }
 
-.hero__details dd {
+.hero--home .hero__details dd {
   margin: 0;
-  color: rgba(255, 255, 255, 0.84);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1.18rem, 1.08vw, 1.3rem);
+  line-height: 1.46;
 }
 
 .section-layout {
