@@ -1976,20 +1976,25 @@ textarea {
     object-position: 60% center;
   }
 
-  .hero__art-rotor {
-    --hero-rotor-offset-y: -50%;
-    right: -10rem;
-    width: 21rem;
-    top: 58%;
-    opacity: 0.1;
+  .hero__art-rotor,
+  .hero__art-rotor-glint {
+    display: none;
   }
 
-  .hero__art-rotor-glint {
-    --hero-rotor-offset-y: -50%;
-    right: -10rem;
-    width: 21rem;
-    top: 58%;
-    opacity: 0.3;
+  .hero--home .hero__layout::before {
+    content: "";
+    position: absolute;
+    top: 17rem;
+    right: -3.75rem;
+    width: clamp(14rem, 56vw, 15rem);
+    aspect-ratio: 1;
+    pointer-events: none;
+    border-radius: 50%;
+    background: url("/assets/rotor-color.svg") center / contain no-repeat;
+    opacity: 0.17;
+    filter: invert(1) brightness(1.44) drop-shadow(0 0 24px rgba(120, 156, 255, 0.14));
+    animation: hero-rotor-spin 26s linear infinite;
+    will-change: transform;
   }
 
   .page-home .section-visual--intro,
