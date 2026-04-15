@@ -5,8 +5,9 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 ## Project Overview
 
 - This repo is a static website build for `quickbrakerepair.com`.
-- The current architecture is plain `HTML/CSS/JS` under [`site/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site).
+- The published site now lives directly at the repository root in plain `HTML/CSS/JS`.
 - WordPress is treated as optional hosting/integration infrastructure, not the primary implementation surface.
+- GitHub Pages branch deploys publish from `main` + `/(root)`, so internal page and asset links should stay relative, not root-relative.
 
 ## Source Of Truth
 
@@ -23,18 +24,18 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 ## Current Site Structure
 
-- Homepage: [`site/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/index.html)
-- Shared styles: [`site/assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/site.css)
-- Shared interactions: [`site/assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/site.js)
+- Homepage: [`index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/index.html)
+- Shared styles: [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css)
+- Shared interactions: [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js)
 - Core pages:
-  - [`site/contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/contact/index.html)
-  - [`site/areas-we-serve/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/areas-we-serve/index.html)
-  - [`site/premium/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/premium/index.html)
-  - [`site/standard/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/standard/index.html)
-  - [`site/resources/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/resources/index.html)
+  - [`contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/contact/index.html)
+  - [`areas-we-serve/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/areas-we-serve/index.html)
+  - [`premium/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/premium/index.html)
+  - [`standard/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/standard/index.html)
+  - [`resources/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/resources/index.html)
 - Generated homepage hero media:
-  - [`site/assets/generated/hero-loop.mp4`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/generated/hero-loop.mp4)
-  - [`site/assets/generated/hero-poster.jpg`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/generated/hero-poster.jpg)
+  - [`assets/generated/hero-loop.mp4`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-loop.mp4)
+  - [`assets/generated/hero-poster.jpg`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-poster.jpg)
 
 ## Design Direction
 
@@ -64,24 +65,25 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 After meaningful UI changes:
 
 1. Run `git diff --check`
-2. Run `node --check site/assets/site.js`
+2. Run `node --check assets/site.js`
 3. Serve locally with:
    ```bash
-   python3 -m http.server 4173 --directory site
+   python3 -m http.server 4173 --directory ..
    ```
+   Then open `http://127.0.0.1:4173/QuickBrakeRepair/` to mirror the GitHub Pages project path.
 4. Verify with Playwright screenshots at desktop and mobile widths.
 5. Spot-check at least one interior page if shared CSS changed.
 
 ## Preferred Commands
 
 ```bash
-rg --files site
-sed -n '1,260p' site/index.html
-sed -n '1,260p' site/assets/site.css
-node --check site/assets/site.js
-python3 -m http.server 4173 --directory site
-npx --yes playwright screenshot -b chromium --viewport-size="1440,1100" --wait-for-timeout 1400 http://127.0.0.1:4173/ /tmp/qbr-home.png
-npx --yes playwright screenshot -b chromium --viewport-size="390,844" --wait-for-timeout 1400 http://127.0.0.1:4173/ /tmp/qbr-home-mobile.png
+rg --files | sed -n '1,200p'
+sed -n '1,260p' index.html
+sed -n '1,260p' assets/site.css
+node --check assets/site.js
+python3 -m http.server 4173 --directory ..
+npx --yes playwright screenshot -b chromium --viewport-size="1440,1100" --wait-for-timeout 1400 http://127.0.0.1:4173/QuickBrakeRepair/ /tmp/qbr-home.png
+npx --yes playwright screenshot -b chromium --viewport-size="390,844" --wait-for-timeout 1400 http://127.0.0.1:4173/QuickBrakeRepair/ /tmp/qbr-home-mobile.png
 ```
 
 ## When In Doubt

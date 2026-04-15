@@ -6,13 +6,40 @@ const siteHeader = document.querySelector(".site-header");
 const homeHero = document.querySelector(".hero--home");
 const homeLightSection = homeHero?.nextElementSibling;
 
+const normalizePathname = (value) => {
+  if (!value) {
+    return "/";
+  }
+
+  return `${value}`.replace(/\/?$/, "/");
+};
+
+const findNavLink = (pathname) => {
+  if (!siteNav) {
+    return null;
+  }
+
+  return [...siteNav.querySelectorAll("a[href]")]
+    .find((link) => {
+      const href = link.getAttribute("href");
+
+      if (!href || href.startsWith("#")) {
+        return false;
+      }
+
+      const resolvedPathname = normalizePathname(new URL(href, window.location.href).pathname);
+
+      return resolvedPathname === pathname || resolvedPathname.endsWith(pathname);
+    }) || null;
+};
+
 const buildServicesDropdown = () => {
   if (!siteNav || siteNav.querySelector(".site-nav__group--services")) {
     return null;
   }
 
-  const premiumLink = siteNav.querySelector('a[href="/premium/"]');
-  const standardLink = siteNav.querySelector('a[href="/standard/"]');
+  const premiumLink = findNavLink("/premium/");
+  const standardLink = findNavLink("/standard/");
 
   if (!premiumLink || !standardLink) {
     return null;
@@ -43,8 +70,7 @@ const buildServicesDropdown = () => {
 
   dropdownGroup.append(trigger, dropdown);
 
-  const insertBeforeTarget =
-    siteNav.querySelector('a[href="/areas-we-serve/"]') || premiumLink;
+  const insertBeforeTarget = findNavLink("/areas-we-serve/") || premiumLink;
 
   siteNav.insertBefore(dropdownGroup, insertBeforeTarget);
 

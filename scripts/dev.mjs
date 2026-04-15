@@ -1,7 +1,7 @@
 import { extname, resolve, sep } from "node:path";
 import { stat } from "node:fs/promises";
 
-const siteRoot = resolve(process.cwd(), "site");
+const siteRoot = resolve(process.cwd());
 const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || "localhost";
 

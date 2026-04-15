@@ -55,8 +55,8 @@ Required characteristics:
 
 Hero media currently lives at:
 
-- [`site/assets/generated/hero-loop.mp4`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/generated/hero-loop.mp4)
-- [`site/assets/generated/hero-poster.jpg`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/generated/hero-poster.jpg)
+- [`assets/generated/hero-loop.mp4`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-loop.mp4)
+- [`assets/generated/hero-poster.jpg`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-poster.jpg)
 
 If replacing the hero media in the future:
 
@@ -67,8 +67,10 @@ If replacing the hero media in the future:
 ## 5. Technical Guidance
 
 - Prefer static HTML/CSS/JS.
-- Shared design changes should flow through [`site/assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/site.css).
-- Shared behavior should live in [`site/assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/assets/site.js).
+- The published site now lives at the repository root, not under `site/`.
+- Because GitHub Pages branch deploys this repo at a project path, prefer relative page and asset links over root-relative paths.
+- Shared design changes should flow through [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css).
+- Shared behavior should live in [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js).
 - Use page-specific classes only where shared abstractions become too broad.
 
 ## 6. Verification Standard
@@ -77,18 +79,19 @@ At minimum, after UI changes:
 
 ```bash
 git diff --check
-node --check site/assets/site.js
-python3 -m http.server 4173 --directory site
+node --check assets/site.js
+python3 -m http.server 4173 --directory ..
 ```
 
 Then verify the homepage visually with Playwright at:
 
 - desktop width
 - mobile width
+- using `http://127.0.0.1:4173/QuickBrakeRepair/` so the preview matches the GitHub Pages project path
 
 If shared CSS changed, also verify at least one non-home page such as:
 
-- [`site/contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/site/contact/index.html)
+- [`contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/contact/index.html)
 
 ## 7. Good Future Work
 

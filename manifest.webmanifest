@@ -1,13 +1,13 @@
 {
   "name": "Quick Brake Repair",
   "short_name": "Quick Brake",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0a0f17",
   "theme_color": "#205cff",
   "icons": [
     {
-      "src": "/assets/favicon.svg",
+      "src": "./assets/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

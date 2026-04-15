@@ -195,7 +195,7 @@ body.has-open-nav .call-pill {
 .brand-mark {
   width: 3.4rem;
   aspect-ratio: 1;
-  background: url("/assets/logo.png") center / contain no-repeat;
+  background: url("./logo.png") center / contain no-repeat;
   filter: drop-shadow(0 8px 18px rgba(8, 26, 55, 0.16));
 }
 
@@ -1148,7 +1148,7 @@ textarea {
   transform: translateY(var(--hero-rotor-offset-y));
   transform-origin: center;
   isolation: isolate;
-  background: url("/assets/rotor-color.svg") center / contain no-repeat;
+  background: url("./rotor-color.svg") center / contain no-repeat;
   opacity: 0.24;
   filter: invert(1) brightness(1.3) drop-shadow(0 0 36px rgba(120, 156, 255, 0.1));
   animation: hero-rotor-spin 26s linear infinite;
@@ -1204,8 +1204,8 @@ textarea {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  -webkit-mask: url("/assets/rotor-color.svg") center / contain no-repeat;
-  mask: url("/assets/rotor-color.svg") center / contain no-repeat;
+  -webkit-mask: url("./rotor-color.svg") center / contain no-repeat;
+  mask: url("./rotor-color.svg") center / contain no-repeat;
 }
 
 .hero__art-rotor::before {

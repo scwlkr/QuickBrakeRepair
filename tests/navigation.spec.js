@@ -2,9 +2,9 @@ import { expect, test } from "@playwright/test";
 
 const mobileViewport = { width: 430, height: 932 };
 
-async function openMobileNav(page, path = "/") {
+async function openMobileNav(page, path = "") {
   await page.setViewportSize(mobileViewport);
-  await page.goto(path);
+  await page.goto(path || ".");
   await page.getByRole("button", { name: /open navigation/i }).click();
   await expect(page.locator(".site-nav")).toHaveClass(/is-open/);
 }
@@ -25,7 +25,7 @@ test("mobile nav opens as a full drawer on the homepage", async ({ page }) => {
   ).toBeVisible();
 });
 
-for (const path of ["/", "/contact/"]) {
+for (const path of ["", "contact/"]) {
   test(`mobile Services menu reveals Premium and Standard on ${path}`, async ({
     page,
   }) => {
