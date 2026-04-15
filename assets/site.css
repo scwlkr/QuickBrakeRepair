@@ -1646,6 +1646,62 @@ textarea {
   gap: clamp(1.75rem, 3.4vw, 4rem);
 }
 
+.page-contact .hero__grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(21rem, 28rem);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.page-contact #contact-request {
+  scroll-margin-top: 8rem;
+}
+
+.page-contact .hero-form-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  padding: 1.55rem;
+  border-color: rgba(8, 26, 55, 0.1);
+  background:
+    radial-gradient(circle at top right, rgba(29, 99, 255, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(245, 249, 255, 0.96) 100%);
+  box-shadow: var(--shadow-md);
+}
+
+.page-contact .hero-form-card h2 {
+  font-size: clamp(1.7rem, 2.3vw, 2.2rem);
+}
+
+.page-contact .hero-form-card .eyebrow {
+  margin-bottom: 0.1rem;
+}
+
+.page-contact .hero-form-card .contact-note {
+  font-size: 0.96rem;
+}
+
+.page-contact .hero-form-card .form-status {
+  margin: 0;
+}
+
+.page-contact .hero-form-card .contact-form {
+  margin-top: 0;
+}
+
+.page-contact .hero-form-card .button {
+  width: 100%;
+  justify-content: center;
+}
+
+.page-contact .contact-direct-panel {
+  padding-top: 1.5rem;
+}
+
+.page-contact .card--contact-direct {
+  max-width: 34rem;
+}
+
 .page-contact .contact-intro__copy {
   display: grid;
   align-content: start;
@@ -2120,6 +2176,7 @@ textarea {
   .site-footer__grid,
   .section-layout,
   .page-home .section-layout--intro-visual,
+  .page-contact .hero__grid,
   .page-contact .section-layout--contact-intro,
   .article-layout,
   .service-grid,
@@ -2147,6 +2204,10 @@ textarea {
   .page-home .service-pane__visual,
   .page-contact .contact-intro__media {
     max-width: 32rem;
+  }
+
+  .page-contact .card--contact-direct {
+    max-width: none;
   }
 
   .page-home .section-visual--intro {
