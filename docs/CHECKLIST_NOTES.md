@@ -28,6 +28,7 @@ Working notes for the items tracked in [CHECKLIST.md](./CHECKLIST.md).
 - Updated all static HTML pages to use the new PNG favicon and Apple touch icon tags.
 - Updated [`manifest.webmanifest`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/manifest.webmanifest) to reference PNG icons instead of the old SVG favicon.
 - Rebuilt the homepage reviews section in [`index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/index.html) with a darker editorial layout, rating summary, and improved CTA hierarchy while preserving the existing review quotes.
+- Adjusted the review-card quote marks in [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css) to prevent overlap with testimonial copy and reduce visual crowding.
 - Added a shared reveal-motion system in [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css) and [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js).
 - Added a contact-form success state and switched the form in [`contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/contact/index.html) from `mailto:` to FormSubmit with:
   - primary inbox: `Empstacked@gmail.com`
