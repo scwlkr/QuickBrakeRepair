@@ -59,19 +59,20 @@
   margin-top: 0;
   display: flex;
   flex: 1 1 auto;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 0;
+}
+
+.page-contact .hero-form-card .contact-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem 0.85rem;
 }
 
-.page-contact .hero-form-card .contact-form__field {
-  flex: 0 0 calc(50% - 0.425rem);
-}
-
 .page-contact .hero-form-card .form-honeypot,
-.page-contact .hero-form-card .contact-form__field--full,
-.page-contact .hero-form-card .contact-form__submit {
-  flex-basis: 100%;
+.page-contact .hero-form-card .contact-form__field--full {
+  width: 100%;
 }
 
 .page-contact .hero-form-card .contact-form textarea {

@@ -82,6 +82,13 @@ After meaningful UI changes:
 4. Verify with Playwright screenshots at desktop and mobile widths.
 5. Spot-check at least one interior page if shared CSS changed.
 
+During visual QA, explicitly check for layout dead space:
+
+- In paired desktop layouts, card bottoms should align unless there is a deliberate asymmetry.
+- CTA cards and form cards should not contain large empty space below their final action or content block.
+- If a card is stretched to match a neighboring card, make sure its internal content is intentionally distributed so it reaches the visual bottom cleanly.
+- Do not sign off after a “looks close enough” pass; inspect the screenshot for empty vertical gaps, floating CTAs, and awkward card anchoring.
+
 ## Preferred Commands
 
 ```bash

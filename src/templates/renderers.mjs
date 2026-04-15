@@ -371,10 +371,12 @@ function renderContact(page, site) {
             <input type="hidden" name="_template" value="${escapeHtml(site.contactForm.template)}">
             <input type="hidden" name="_next" value="${escapeHtml(statusNextUrl)}">
             <label class="form-honeypot" aria-hidden="true"><span>Leave this field empty</span><input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
-            <label class="contact-form__field"><span>Name</span><input type="text" name="name" required></label>
-            <label class="contact-form__field"><span>Phone</span><input type="tel" name="phone" required></label>
-            <label class="contact-form__field"><span>Email</span><input type="email" name="email" required></label>
-            <label class="contact-form__field"><span>Vehicle</span><input type="text" name="vehicle" placeholder="Year, make, model"></label>
+            <div class="contact-form__grid">
+              <label class="contact-form__field"><span>Name</span><input type="text" name="name" required></label>
+              <label class="contact-form__field"><span>Phone</span><input type="tel" name="phone" required></label>
+              <label class="contact-form__field"><span>Email</span><input type="email" name="email" required></label>
+              <label class="contact-form__field"><span>Vehicle</span><input type="text" name="vehicle" placeholder="Year, make, model"></label>
+            </div>
             <label class="contact-form__field contact-form__field--full"><span>Service location</span><input type="text" name="service_location" placeholder="City or address"></label>
             <label class="contact-form__field contact-form__field--full"><span>What are you noticing?</span><textarea name="symptoms" rows="5" placeholder="Noise, pulling, warning light, soft pedal, grinding, etc."></textarea></label>
             <button class="button button--primary contact-form__submit" type="submit">Send Request</button>

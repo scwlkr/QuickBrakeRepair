@@ -197,8 +197,8 @@
     grid-template-columns: 1fr;
   }
 
-  .page-contact .hero-form-card .contact-form__field {
-    flex-basis: 100%;
+  .page-contact .hero-form-card .contact-form__grid {
+    grid-template-columns: 1fr;
   }
 
   .page-contact .card--contact-direct h2 {
