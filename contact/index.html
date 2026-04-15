@@ -15,7 +15,8 @@
     <meta name="twitter:title" content="Call Our Brake Repair Company in Dallas, TX | Quick Brake Repair">
     <meta name="twitter:description" content="Get mobile brake repair and replacement services in the Dallas, TX area. Request a free quote today.">
     <link rel="canonical" href="https://www.quickbrakerepair.com/contact">
-    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
     <link rel="manifest" href="../manifest.webmanifest">
     <link rel="stylesheet" href="../assets/site.css">
     <script type="application/ld+json">{
@@ -123,15 +124,21 @@
       <div class="split-grid">
         <article class="card">
           <h2>Share the vehicle issue first</h2>
-          <p class="contact-note">This static build uses an email-based fallback form action for now. The build approach keeps WordPress reserved for utility integrations, so this form can be swapped to a WordPress endpoint or embedded form later without changing the page layout.</p>
-          <form class="contact-form" action="mailto:info@quickbrakerepair.com" method="post" enctype="text/plain">
+          <p class="contact-note">Use the form below to send your vehicle details directly for follow-up. The static build keeps the layout independent from any future WordPress integration, so the delivery method can still be swapped later without redesigning the page.</p>
+          <div class="form-status" data-form-status hidden role="status" aria-live="polite"></div>
+          <form class="contact-form" action="https://formsubmit.co/Empstacked@gmail.com" method="post">
+            <input type="hidden" name="_subject" value="Quick Brake Repair website contact request">
+            <input type="hidden" name="_cc" value="shane.caleb.walker@gmail.com">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://www.quickbrakerepair.com/contact/?submitted=1#contact-request">
+            <label class="form-honeypot" aria-hidden="true"><span>Leave this field empty</span><input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
             <label><span>Name</span><input type="text" name="name" required></label>
             <label><span>Phone</span><input type="tel" name="phone" required></label>
             <label><span>Email</span><input type="email" name="email" required></label>
             <label><span>Vehicle</span><input type="text" name="vehicle" placeholder="Year, make, model"></label>
-            <label><span>Service location</span><input type="text" name="location" placeholder="City or address"></label>
+            <label><span>Service location</span><input type="text" name="service_location" placeholder="City or address"></label>
             <label><span>What are you noticing?</span><textarea name="symptoms" rows="5" placeholder="Noise, pulling, warning light, soft pedal, grinding, etc."></textarea></label>
-            <button class="button button--primary" type="submit">Email Request</button>
+            <button class="button button--primary" type="submit">Send Request</button>
           </form>
         </article>
         <article class="card">
