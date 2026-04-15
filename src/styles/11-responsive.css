@@ -192,10 +192,13 @@
     order: -1;
   }
 
-  .page-contact .hero-form-card .contact-form,
   .page-contact .card--contact-direct,
   .page-contact .contact-list--direct {
     grid-template-columns: 1fr;
+  }
+
+  .page-contact .hero-form-card .contact-form__field {
+    flex-basis: 100%;
   }
 
   .page-contact .card--contact-direct h2 {

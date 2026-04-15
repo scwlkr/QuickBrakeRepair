@@ -1942,6 +1942,7 @@ textarea {
   flex-direction: column;
   gap: clamp(1.4rem, 2.4vw, 2.35rem);
   min-width: 0;
+  height: 100%;
 }
 
 .page-contact .hero__content {
@@ -1953,12 +1954,11 @@ textarea {
 }
 
 .page-contact .hero-form-card {
-  grid-column: 2;
-  grid-row: 1 / span 2;
   position: relative;
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 0.9rem;
+  min-height: 100%;
   padding: 1.55rem;
   border-color: rgba(8, 26, 55, 0.1);
   background:
@@ -1985,18 +1985,29 @@ textarea {
 
 .page-contact .hero-form-card .contact-form {
   margin-top: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  align-content: flex-start;
   gap: 0.9rem 0.85rem;
+}
+
+.page-contact .hero-form-card .contact-form__field {
+  flex: 0 0 calc(50% - 0.425rem);
 }
 
 .page-contact .hero-form-card .form-honeypot,
 .page-contact .hero-form-card .contact-form__field--full,
 .page-contact .hero-form-card .contact-form__submit {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
 }
 
 .page-contact .hero-form-card .contact-form textarea {
   min-height: 8.75rem;
+}
+
+.page-contact .hero-form-card .contact-form__submit {
+  margin-top: auto;
 }
 
 .page-contact .hero-form-card .button {
@@ -2296,10 +2307,13 @@ textarea {
     order: -1;
   }
 
-  .page-contact .hero-form-card .contact-form,
   .page-contact .card--contact-direct,
   .page-contact .contact-list--direct {
     grid-template-columns: 1fr;
+  }
+
+  .page-contact .hero-form-card .contact-form__field {
+    flex-basis: 100%;
   }
 
   .page-contact .card--contact-direct h2 {
