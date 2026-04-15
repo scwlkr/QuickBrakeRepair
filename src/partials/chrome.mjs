@@ -117,7 +117,14 @@ export function renderFooter(page, site) {
       <p>Mon - Sat: 8:00 am - 7:00 pm | Sunday: Closed | Overnight and weekend appointments available</p>
       <p>Copyright © ${escapeHtml(site.name)}. All Rights Reserved.</p>
     </div>
-    <a class="floating-call" href="${escapeHtml(site.phoneHref)}">Call ${escapeHtml(site.phoneDisplay)}</a>
+    <a class="floating-call" href="${escapeHtml(site.phoneHref)}" aria-label="Call ${escapeHtml(site.phoneDisplay)}">
+      <span class="floating-call__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false">
+          <path d="M6.62 10.79a15.06 15.06 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.11.37 2.3.56 3.51.56a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.21.19 2.4.56 3.51a1 1 0 0 1-.24 1.02l-2.2 2.26Z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="floating-call__text">Call ${escapeHtml(site.phoneDisplay)}</span>
+    </a>
   </footer>`;
 }
 
