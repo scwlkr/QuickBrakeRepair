@@ -1772,8 +1772,10 @@ textarea {
   }
 
   .site-nav {
-    position: fixed;
-    inset: 5.7rem 1rem 1rem 1rem;
+    position: absolute;
+    top: calc(100% + 0.7rem);
+    right: max(1rem, calc((100vw - var(--shell)) / 2));
+    left: auto;
     z-index: 55;
     display: none;
     flex-direction: column;
@@ -1781,8 +1783,8 @@ textarea {
     justify-content: flex-start;
     gap: 0.45rem;
     width: min(calc(100vw - 2rem), 28rem);
-    max-height: calc(100svh - 6.7rem);
-    margin-inline: auto;
+    max-height: calc(100svh - 7.25rem);
+    margin: 0;
     padding: 1rem;
     overflow-y: auto;
     border: 1px solid rgba(255, 255, 255, 0.08);
