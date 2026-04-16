@@ -4,43 +4,87 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 ## Project Overview
 
-- This repo is a static website build for `quickbrakerepair.com`.
-- The published site lives directly at the repository root in plain `HTML/CSS/JS`.
-- The authoring source of truth now lives under [`src/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src), and `npm run build` regenerates the publishable root files.
-- WordPress is treated as optional hosting/integration infrastructure, not the primary implementation surface.
-- GitHub Pages branch deploys publish from `main` + `/(root)`, so internal page and asset links should stay relative, not root-relative.
+- This repo now centers on the WordPress theme for `quickbrakerepair.com`.
+- The primary implementation surface is [`wordpress-theme/quick-brake-repair-theme/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme).
+- The legacy static site at the repository root and the old authoring flow under [`src/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src) remain as reference material, not the default place to make changes.
+- Do not refactor or replace the existing static site unless a separate request explicitly asks for that work.
+- Assume future site work should stay inside the theme unless the user says otherwise.
 
 ## Source Of Truth
 
-- Read [`docs/WEBSITE_BUILD_APPROACH.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/docs/WEBSITE_BUILD_APPROACH.md) before making structural changes.
-- Read [`docs/PROJECT_AGENT_GUIDANCE.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/docs/PROJECT_AGENT_GUIDANCE.md) before making UI changes.
+- Read [`wordpress-theme/THEME_EDITING_GUIDE.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/THEME_EDITING_GUIDE.md) before making structural or UI changes.
+- Read [`wordpress-theme/MIGRATION_NOTES.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/MIGRATION_NOTES.md) before changing routing, slugs, or mapped content.
+- Read [`docs/PROJECT_AGENT_GUIDANCE.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/docs/PROJECT_AGENT_GUIDANCE.md) before making major visual changes.
+- Treat [`docs/WEBSITE_BUILD_APPROACH.md`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/docs/WEBSITE_BUILD_APPROACH.md) as legacy background only unless the user explicitly asks to work on the old static pipeline.
+
+## Editing Boundary
+
+- Only edit files inside [`wordpress-theme/quick-brake-repair-theme/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme).
+- Do not hand-edit the generated static root files or `src/` for normal feature, UI, or content work.
+- If a request appears to require non-theme edits, confirm that scope explicitly before touching legacy static files.
+
+## Current Theme Structure
+
+- Theme root:
+  [`wordpress-theme/quick-brake-repair-theme/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme)
+- Layout and template routing:
+  [`functions.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/functions.php),
+  [`header.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/header.php),
+  [`footer.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/footer.php),
+  [`page.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/page.php),
+  [`single.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/single.php),
+  [`archive.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/archive.php),
+  [`front-page.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/front-page.php)
+- Shared data and preserved SEO copy:
+  [`inc/content-map.json`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/content-map.json)
+- Content lookup logic:
+  [`inc/content-map.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/content-map.php)
+- Theme setup and WordPress behavior:
+  [`inc/setup.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/setup.php),
+  [`inc/theme-support.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/theme-support.php),
+  [`inc/enqueue.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/enqueue.php),
+  [`inc/seo.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/inc/seo.php)
+- Page-family layouts:
+  [`template-parts/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/template-parts)
+- Visual styling:
+  [`assets/css/theme.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/assets/css/theme.css)
+- Interaction JS:
+  [`assets/js/theme.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/assets/js/theme.js)
+- FAQ page template:
+  [`page-templates/template-faq.php`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/page-templates/template-faq.php)
+- Bundled theme media:
+  [`assets/images/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/wordpress-theme/quick-brake-repair-theme/assets/images)
+
+## WordPress Content Model
+
+- `Pages` are used for the main site pages, including `/`, `/premium/`, `/standard/`, `/areas-we-serve/`, `/resources/`, `/contact/`, and optional `/faq/`.
+- `Posts` are used for resource articles.
+- `Service Areas` is a custom post type registered by the theme for `/service-area/...` URLs.
+- WordPress admin is mainly for routing, menus, form configuration, and future publishing.
+- High-value structure and preserved SEO copy remain code-driven for now.
+
+## How Theme Content Works
+
+- Matching core page slugs render mapped content from `inc/content-map.json`.
+- Matching post slugs render mapped resource article content.
+- Matching `Service Areas` entries render mapped city-page content under `/service-area/...`.
+- Generic pages and posts that do not match the content map fall back to normal WordPress content output.
+- If a change is layout-only, the right file is usually a template, CSS, or JS file.
+- If a change affects preserved page or article copy, the right file is usually `inc/content-map.json`.
 
 ## Non-Negotiables
 
 - Do not change URL structure.
 - Do not remove pages.
 - Do not merge service-area pages.
+- Preserve the existing slug intent from the old site.
+- Keep service-area URLs under `/service-area/...`.
+- Keep the long article slugs intact.
 - Preserve SEO copy unless the user explicitly asks for copy changes.
 - Favor layout, hierarchy, spacing, internal linking, and visual improvements over text rewrites.
-
-## Current Site Structure
-
-- Authoring content/data: [`src/data/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/data)
-- Authoring templates/partials: [`src/templates/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/templates) and [`src/partials/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/partials)
-- Authoring styles/scripts: [`src/styles/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/styles) and [`src/scripts/`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/src/scripts)
-- Build entrypoint: [`scripts/build.mjs`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/scripts/build.mjs)
-- Published homepage: [`index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/index.html)
-- Published shared styles: [`assets/site.css`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.css)
-- Published shared interactions: [`assets/site.js`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/site.js)
-- Core pages:
-  - [`contact/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/contact/index.html)
-  - [`areas-we-serve/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/areas-we-serve/index.html)
-  - [`premium/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/premium/index.html)
-  - [`standard/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/standard/index.html)
-  - [`resources/index.html`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/resources/index.html)
-- Generated homepage hero media:
-  - [`assets/generated/hero-loop.mp4`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-loop.mp4)
-  - [`assets/generated/hero-poster.jpg`](/Users/shanewalker/Desktop/dev/QuickBrakeRepair/assets/generated/hero-poster.jpg)
+- Prefer updating `inc/content-map.json` for mapped page and article copy instead of hiding preserved content in editor-only content.
+- Keep the Contact page form slot compatible with WordPress.com blocks or shortcode embeds.
+- Avoid adding page builders, framework runtimes, or plugin dependencies just to solve layout work.
 
 ## Design Direction
 
@@ -59,28 +103,37 @@ Project guidance for future coding/design agents working in `QuickBrakeRepair`.
 
 ## Editing Rules
 
-- Do not hand-edit generated root HTML unless the user explicitly asks for a publish-only hotfix.
-- Make structural, content, or shared UI changes in `src/`, then run `npm run build`.
-- Use shared authored CSS/JS modules in `src/styles/` and `src/scripts/` for consistent cross-page changes.
+- Only touch the WordPress theme unless the user explicitly requests legacy static-site work.
+- Do not remove required theme files like `style.css`, `index.php`, `functions.php`, `header.php`, or `footer.php`.
+- Do not move copied local assets out of the theme folder.
+- Do not rename the `qbr_service_area` post type unless a URL migration is intentionally planned.
+- Do not switch mapped pages to editor-driven content unless that migration is intentional and documented.
+- Do not hardcode production domains in templates.
 - Keep page-specific classes scoped and intentional.
-- Avoid introducing frameworks.
-- Keep assets local when possible.
-- If changing theme colors, update `<meta name="theme-color">` across affected static pages.
+- Keep assets local to the theme when possible.
 
 ## Verification Workflow
 
-After meaningful UI changes:
+After meaningful theme changes:
 
-1. Run `npm run build`
-2. Run `git diff --check`
-3. Run `node --check assets/site.js`
-3. Serve locally with:
+1. Run PHP lint across the theme:
    ```bash
-   python3 -m http.server 4173 --directory ..
+   find wordpress-theme/quick-brake-repair-theme -name '*.php' -print0 | xargs -0 -n1 php -l
    ```
-   Then open `http://127.0.0.1:4173/QuickBrakeRepair/` to mirror the GitHub Pages project path.
-4. Verify with Playwright screenshots at desktop and mobile widths.
-5. Spot-check at least one interior page if shared CSS changed.
+2. If JS changed, run:
+   ```bash
+   node --check wordpress-theme/quick-brake-repair-theme/assets/js/theme.js
+   ```
+3. Run `git diff --check`.
+4. If CSS or JS changed, review the affected templates and class names together.
+5. If packaging or release handoff is part of the task, re-zip only `quick-brake-repair-theme/`.
+6. Test on a local WordPress install or staging WordPress.com Business site when available.
+7. Confirm:
+   - homepage layout
+   - contact page form slot
+   - one service-area entry
+   - one resource post
+   - mobile navigation
 
 During visual QA, explicitly check for layout dead space:
 
@@ -92,20 +145,21 @@ During visual QA, explicitly check for layout dead space:
 ## Preferred Commands
 
 ```bash
-rg --files | sed -n '1,200p'
-npm run build
-sed -n '1,260p' src/data/index.mjs
-sed -n '1,260p' src/templates/renderers.mjs
-sed -n '1,260p' assets/site.css
-node --check assets/site.js
-python3 -m http.server 4173 --directory ..
-npx --yes playwright screenshot -b chromium --viewport-size="1440,1100" --wait-for-timeout 1400 http://127.0.0.1:4173/QuickBrakeRepair/ /tmp/qbr-home.png
-npx --yes playwright screenshot -b chromium --viewport-size="390,844" --wait-for-timeout 1400 http://127.0.0.1:4173/QuickBrakeRepair/ /tmp/qbr-home-mobile.png
+rg --files wordpress-theme/quick-brake-repair-theme | sed -n '1,200p'
+sed -n '1,260p' wordpress-theme/quick-brake-repair-theme/functions.php
+sed -n '1,260p' wordpress-theme/quick-brake-repair-theme/inc/content-map.json
+sed -n '1,260p' wordpress-theme/quick-brake-repair-theme/inc/content-map.php
+sed -n '1,260p' wordpress-theme/quick-brake-repair-theme/assets/css/theme.css
+sed -n '1,260p' wordpress-theme/quick-brake-repair-theme/assets/js/theme.js
+find wordpress-theme/quick-brake-repair-theme -name '*.php' -print0 | xargs -0 -n1 php -l
+node --check wordpress-theme/quick-brake-repair-theme/assets/js/theme.js
+cd wordpress-theme && zip -r quick-brake-repair-theme.zip quick-brake-repair-theme
 ```
 
 ## When In Doubt
 
+- Touch the WordPress theme only.
 - Preserve SEO.
-- Preserve structure.
+- Preserve slugs and URL structure.
 - Improve clarity and professionalism.
 - Prefer restraint over decoration.
