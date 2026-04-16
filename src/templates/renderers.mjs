@@ -28,7 +28,7 @@ function renderStandardHero(page, site, options = {}) {
         <p class="hero__summary">${escapeHtml(page.hero.summary)}</p>
         <div class="hero__actions">
           <a class="button button--primary" href="${escapeHtml(site.phoneHref)}">Call Now</a>
-          <a class="button button--secondary" href="${escapeHtml(secondaryHref)}">Request a Quote</a>
+          <a class="button button--secondary" href="${escapeHtml(secondaryHref)}">Free Quote</a>
         </div>
         ${renderHeroStats(options.stats)}
       </div>
@@ -105,7 +105,7 @@ function renderHome(page, site) {
           <p class="hero__summary">${escapeHtml(page.hero.summary)}</p>
           <div class="hero__actions">
             <a class="button button--primary" href="${escapeHtml(site.phoneHref)}">Call Now</a>
-            <a class="button button--secondary" href="${relativePageUrl(page.slug, "contact")}">Request a Quote</a>
+            <a class="button button--secondary button--home-quote" href="${relativePageUrl(page.slug, "contact")}">Free Quote</a>
           </div>
           <div class="hero-stats"><div class="hero-stat"><strong>${escapeHtml(
             site.yearsServing,
@@ -337,7 +337,7 @@ function renderContact(page, site) {
             <p class="hero__summary">${escapeHtml(page.hero.summary)}</p>
             <div class="hero__actions">
               <a class="button button--primary" href="${escapeHtml(site.phoneHref)}">Call Now</a>
-              <a class="button button--secondary" href="#contact-request">Request a Quote</a>
+              <a class="button button--secondary" href="#contact-request">Free Quote</a>
             </div>
             ${renderHeroStats([
               { value: "Free quote", label: "before scheduling" },
