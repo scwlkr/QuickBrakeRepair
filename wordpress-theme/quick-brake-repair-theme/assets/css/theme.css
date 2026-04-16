@@ -2155,6 +2155,15 @@ textarea {
 }
 
 @media (min-width: 1101px) {
+  .site-nav__group {
+    padding-bottom: 0.8rem;
+    margin-bottom: -0.8rem;
+  }
+
+  .site-nav__dropdown {
+    top: 100%;
+  }
+
   .site-nav__group:focus-within .site-nav__dropdown,
   .site-nav__group:hover .site-nav__dropdown {
     opacity: 1;
