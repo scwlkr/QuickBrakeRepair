@@ -255,6 +255,10 @@ function qbr_find_object_by_slug($slug, $type = 'page')
 {
     $normalized = qbr_normalize_slug($slug);
 
+    if ('' === $normalized) {
+        return null;
+    }
+
     if ('service_area' === $type) {
         $post_name = basename($normalized);
         $post      = get_page_by_path($post_name, OBJECT, 'qbr_service_area');
@@ -365,4 +369,3 @@ function qbr_slug_label($slug)
 
     return ucwords($label);
 }
-
