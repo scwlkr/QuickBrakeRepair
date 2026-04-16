@@ -67,6 +67,39 @@ $standard_image = qbr_get_theme_image_uri('img-standard.jpeg');
         </aside>
     </div>
 </section>
+<section class="panel section--reviews shell">
+    <div class="reviews-showcase">
+        <div class="reviews-summary">
+            <div class="section-heading">
+                <span class="eyebrow"><?php echo esc_html(isset($site['reviewHeading']) ? (string) $site['reviewHeading'] : ''); ?></span>
+                <h2><?php esc_html_e('Drivers already trust the mobile model', 'quick-brake-repair-theme'); ?></h2>
+                <p><?php esc_html_e('Read recent feedback from Dallas-area customers, then open our Google profile to leave a review after your service.', 'quick-brake-repair-theme'); ?></p>
+            </div>
+            <div class="reviews-score" aria-label="<?php esc_attr_e('Five out of five stars from Google reviews', 'quick-brake-repair-theme'); ?>">
+                <span class="reviews-score__eyebrow"><?php esc_html_e('Google rating', 'quick-brake-repair-theme'); ?></span>
+                <div class="reviews-score__headline">
+                    <strong><?php echo esc_html(isset($site['reviewRating']) ? (string) $site['reviewRating'] : '5.0'); ?></strong>
+                    <span class="reviews-score__stars" aria-hidden="true">★★★★★</span>
+                </div>
+                <p><?php echo esc_html(isset($site['reviewSummary']) ? (string) $site['reviewSummary'] : ''); ?></p>
+            </div>
+            <ul class="reviews-points" aria-label="<?php esc_attr_e('Reasons customers mention in reviews', 'quick-brake-repair-theme'); ?>">
+                <?php foreach ((array) (isset($site['reviewPoints']) ? $site['reviewPoints'] : array()) as $point) : ?>
+                    <li><?php echo esc_html((string) $point); ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <a class="button button--secondary reviews-link" href="<?php echo esc_url(isset($site['reviewLink']) ? (string) $site['reviewLink'] : '#'); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Leave a Google review', 'quick-brake-repair-theme'); ?></a>
+        </div>
+        <div class="testimonial-grid">
+            <?php foreach ((array) (isset($site['testimonials']) ? $site['testimonials'] : array()) as $index => $testimonial) : ?>
+                <blockquote class="testimonial<?php echo 0 === $index ? ' testimonial--lead' : ''; ?>">
+                    <p><?php echo esc_html('“' . (isset($testimonial['quote']) ? (string) $testimonial['quote'] : '') . '”'); ?></p>
+                    <footer><?php echo esc_html(isset($testimonial['author']) ? (string) $testimonial['author'] : ''); ?></footer>
+                </blockquote>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 <section class="content-section section--intro shell">
     <div class="section-layout section-layout--intro-visual">
         <div class="section-heading">
@@ -146,39 +179,6 @@ $standard_image = qbr_get_theme_image_uri('img-standard.jpeg');
                     <strong><?php echo esc_html(isset($service_area['heroTitle']) ? (string) $service_area['heroTitle'] : ''); ?></strong>
                     <span><?php echo esc_html(isset($service_area['heroSummary']) ? (string) $service_area['heroSummary'] : ''); ?></span>
                 </a>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-<section class="panel section--reviews shell">
-    <div class="reviews-showcase">
-        <div class="reviews-summary">
-            <div class="section-heading">
-                <span class="eyebrow"><?php echo esc_html(isset($site['reviewHeading']) ? (string) $site['reviewHeading'] : ''); ?></span>
-                <h2><?php esc_html_e('Drivers already trust the mobile model', 'quick-brake-repair-theme'); ?></h2>
-                <p><?php esc_html_e('Read recent feedback from Dallas-area customers, then open our Google profile to leave a review after your service.', 'quick-brake-repair-theme'); ?></p>
-            </div>
-            <div class="reviews-score" aria-label="<?php esc_attr_e('Five out of five stars from Google reviews', 'quick-brake-repair-theme'); ?>">
-                <span class="reviews-score__eyebrow"><?php esc_html_e('Google rating', 'quick-brake-repair-theme'); ?></span>
-                <div class="reviews-score__headline">
-                    <strong><?php echo esc_html(isset($site['reviewRating']) ? (string) $site['reviewRating'] : '5.0'); ?></strong>
-                    <span class="reviews-score__stars" aria-hidden="true">★★★★★</span>
-                </div>
-                <p><?php echo esc_html(isset($site['reviewSummary']) ? (string) $site['reviewSummary'] : ''); ?></p>
-            </div>
-            <ul class="reviews-points" aria-label="<?php esc_attr_e('Reasons customers mention in reviews', 'quick-brake-repair-theme'); ?>">
-                <?php foreach ((array) (isset($site['reviewPoints']) ? $site['reviewPoints'] : array()) as $point) : ?>
-                    <li><?php echo esc_html((string) $point); ?></li>
-                <?php endforeach; ?>
-            </ul>
-            <a class="button button--secondary reviews-link" href="<?php echo esc_url(isset($site['reviewLink']) ? (string) $site['reviewLink'] : '#'); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Leave a Google review', 'quick-brake-repair-theme'); ?></a>
-        </div>
-        <div class="testimonial-grid">
-            <?php foreach ((array) (isset($site['testimonials']) ? $site['testimonials'] : array()) as $index => $testimonial) : ?>
-                <blockquote class="testimonial<?php echo 0 === $index ? ' testimonial--lead' : ''; ?>">
-                    <p><?php echo esc_html('“' . (isset($testimonial['quote']) ? (string) $testimonial['quote'] : '') . '”'); ?></p>
-                    <footer><?php echo esc_html(isset($testimonial['author']) ? (string) $testimonial['author'] : ''); ?></footer>
-                </blockquote>
             <?php endforeach; ?>
         </div>
     </div>
