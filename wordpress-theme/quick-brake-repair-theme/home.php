@@ -12,8 +12,7 @@ get_template_part(
     array(
         'eyebrow' => __('Quick Brake Repair Journal', 'quick-brake-repair-theme'),
         'title'   => __('Latest resource articles and updates', 'quick-brake-repair-theme'),
-        'summary' => __('Use the blog index for ongoing article publishing. The mapped resources page remains the primary SEO landing page for the existing article set.', 'quick-brake-repair-theme'),
+        'summary' => __('Browse the latest brake repair articles, service updates, and practical guidance from Quick Brake Repair.', 'quick-brake-repair-theme'),
     )
 );
 get_footer();
-

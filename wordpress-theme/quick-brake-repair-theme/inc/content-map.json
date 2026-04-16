@@ -40,8 +40,8 @@
     "heroSummary": "Use this page for longer-form answers about scheduling, service coverage, repair scope, and what to expect from Quick Brake Repair.",
     "introHeading": "Helpful answers before you schedule",
     "introParagraphs": [
-      "This FAQ template is included so the WordPress rebuild can support a dedicated question-and-answer page in addition to the FAQ section already used on the resources page.",
-      "Keep answers direct, practical, and aligned with the existing service copy so the FAQ page reinforces rankings instead of diluting page intent."
+      "This page brings together direct answers about scheduling, service coverage, repair scope, and common brake concerns before you book an appointment.",
+      "Use these answers to get a clearer picture of what Quick Brake Repair can inspect, repair, and recommend during a mobile service visit."
     ],
     "items": [
       {
@@ -348,7 +348,7 @@
         "When you call Quick Brake Repair, you’ll get a free quote before the appointment is booked. That makes it easier to understand the likely path forward before service begins.",
         "For the fastest response, call directly. If you prefer, use the contact form on this page and include the vehicle, location, and symptoms you’re noticing."
       ],
-      "formNotice": "Use the form below to send your vehicle details directly for follow-up. The static build keeps the layout independent from any future WordPress integration, so the delivery method can still be swapped later without redesigning the page.",
+      "formNotice": "Use the form below to share your vehicle details, service location, and brake symptoms so Quick Brake Repair can follow up with the right next steps.",
       "lastmod": "2026-02-23",
       "priority": "1.0",
       "changefreq": "monthly",

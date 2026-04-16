@@ -22,7 +22,7 @@ qbr_render_page_hero(
         </article>
         <article class="card">
             <h2><?php esc_html_e('Resources', 'quick-brake-repair-theme'); ?></h2>
-            <p><?php esc_html_e('Browse the brake repair guides preserved from the current site.', 'quick-brake-repair-theme'); ?></p>
+            <p><?php esc_html_e('Browse brake repair guides covering common symptoms, service questions, and maintenance topics.', 'quick-brake-repair-theme'); ?></p>
             <a class="text-link" href="<?php echo esc_url(qbr_get_mapped_permalink('resources', 'page')); ?>"><?php esc_html_e('View Resources', 'quick-brake-repair-theme'); ?></a>
         </article>
         <article class="card">

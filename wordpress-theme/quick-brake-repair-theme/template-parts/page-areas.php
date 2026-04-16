@@ -18,7 +18,7 @@ qbr_render_text_section((string) $page['introHeading'], (array) $page['introPara
 ?>
 <section class="panel shell">
     <div class="section-heading">
-        <h2><?php esc_html_e('Preserved city URLs, rebuilt with better internal navigation', 'quick-brake-repair-theme'); ?></h2>
+        <h2><?php esc_html_e('Choose the Dallas-area location closest to you', 'quick-brake-repair-theme'); ?></h2>
     </div>
     <div class="card-grid card-grid--three">
         <?php foreach ($service_areas as $service_area) : ?>

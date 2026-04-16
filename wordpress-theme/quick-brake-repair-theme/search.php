@@ -12,8 +12,7 @@ get_template_part(
     array(
         'eyebrow' => __('Search', 'quick-brake-repair-theme'),
         'title'   => sprintf(__('Search results for "%s"', 'quick-brake-repair-theme'), get_search_query()),
-        'summary' => __('Search across pages, service areas, and resource posts inside the Quick Brake Repair WordPress rebuild.', 'quick-brake-repair-theme'),
+        'summary' => __('Search across Quick Brake Repair pages, service areas, and resource articles.', 'quick-brake-repair-theme'),
     )
 );
 get_footer();
-
