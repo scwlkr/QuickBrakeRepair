@@ -59,31 +59,18 @@ add_action('init', 'qbr_register_post_types');
 function qbr_filter_body_classes($classes)
 {
     if (is_front_page()) {
-        $classes[] = 'qbr-page-home';
+        $classes[] = 'page-home';
     }
 
     if (is_page()) {
         $slug = get_post_field('post_name', get_queried_object_id());
         $page = qbr_get_core_page($slug);
 
-        if (is_array($page) && ! empty($page['template'])) {
-            $classes[] = 'qbr-template-' . sanitize_html_class((string) $page['template']);
-        }
-    }
-
-    if (is_singular('qbr_service_area')) {
-        $classes[] = 'qbr-template-location';
-    }
-
-    if (is_singular('post')) {
-        $article = qbr_get_article(get_post_field('post_name', get_queried_object_id()));
-
-        if (is_array($article)) {
-            $classes[] = 'qbr-template-article';
+        if (is_array($page) && ! empty($page['template']) && 'contact' === (string) $page['template']) {
+            $classes[] = 'page-contact';
         }
     }
 
     return $classes;
 }
 add_filter('body_class', 'qbr_filter_body_classes');
-

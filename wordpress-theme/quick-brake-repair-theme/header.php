@@ -10,6 +10,8 @@ if (! defined('ABSPATH')) {
 }
 
 $site = qbr_get_site_data();
+$site_name = isset($site['name']) ? (string) $site['name'] : get_bloginfo('name');
+$brand_tagline = isset($site['brandTagline']) ? (string) $site['brandTagline'] : get_bloginfo('description');
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -19,31 +21,30 @@ $site = qbr_get_site_data();
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="qbr-skip-link" href="#qbr-main"><?php esc_html_e('Skip to content', 'quick-brake-repair-theme'); ?></a>
-<div class="qbr-site-shell">
-    <header class="qbr-header" data-site-header>
-        <div class="qbr-shell qbr-header__inner">
-            <a class="qbr-brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php esc_attr_e('Quick Brake Repair home', 'quick-brake-repair-theme'); ?>">
+<a class="skip-link" href="#main-content"><?php esc_html_e('Skip to content', 'quick-brake-repair-theme'); ?></a>
+<div class="site-chrome">
+    <header class="site-header">
+        <div class="site-header__inner shell">
+            <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr($site_name . ' home'); ?>">
                 <?php echo wp_kses_post(qbr_get_brand_markup()); ?>
-                <span class="qbr-brand__text">
-                    <strong><?php bloginfo('name'); ?></strong>
-                    <span><?php echo esc_html(isset($site['brandTagline']) ? (string) $site['brandTagline'] : get_bloginfo('description')); ?></span>
+                <span class="brand__text">
+                    <strong><?php echo esc_html($site_name); ?></strong>
+                    <span><?php echo esc_html($brand_tagline); ?></span>
                 </span>
             </a>
-            <button class="qbr-nav-toggle" type="button" aria-expanded="false" aria-controls="qbr-primary-nav" data-nav-toggle>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="<?php esc_attr_e('Open navigation', 'quick-brake-repair-theme'); ?>">
                 <span></span>
                 <span></span>
                 <span></span>
-                <span class="screen-reader-text"><?php esc_html_e('Toggle navigation', 'quick-brake-repair-theme'); ?></span>
+                <span class="sr-only"><?php esc_html_e('Toggle navigation', 'quick-brake-repair-theme'); ?></span>
             </button>
-            <nav id="qbr-primary-nav" class="qbr-nav" aria-label="<?php esc_attr_e('Primary navigation', 'quick-brake-repair-theme'); ?>" data-nav-panel>
+            <nav id="site-nav" class="site-nav" aria-label="<?php esc_attr_e('Primary', 'quick-brake-repair-theme'); ?>">
                 <?php qbr_render_primary_navigation(); ?>
             </nav>
-            <a class="qbr-call-pill" href="<?php echo esc_url(isset($site['phoneHref']) ? (string) $site['phoneHref'] : '#'); ?>">
+            <a class="call-pill" href="<?php echo esc_url(isset($site['phoneHref']) ? (string) $site['phoneHref'] : '#'); ?>">
                 <?php echo esc_html(isset($site['phoneDisplay']) ? (string) $site['phoneDisplay'] : ''); ?>
             </a>
         </div>
     </header>
-    <main id="qbr-main">
+    <main id="main-content"<?php echo is_front_page() ? ' class="page-home__main"' : ''; ?>>
         <?php qbr_render_breadcrumbs(); ?>
-

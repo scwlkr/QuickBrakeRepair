@@ -10,6 +10,17 @@ if (! defined('ABSPATH')) {
 }
 
 /**
+ * Get a theme image asset URI.
+ *
+ * @param string $filename Image filename relative to /assets/images.
+ * @return string
+ */
+function qbr_get_theme_image_uri($filename)
+{
+    return get_theme_file_uri('/assets/images/' . ltrim((string) $filename, '/'));
+}
+
+/**
  * Get the theme logo URL.
  *
  * @return string
@@ -26,7 +37,7 @@ function qbr_get_logo_url()
         }
     }
 
-    return get_theme_file_uri('/assets/images/logo.png');
+    return qbr_get_theme_image_uri('logo.png');
 }
 
 /**
@@ -37,9 +48,8 @@ function qbr_get_logo_url()
 function qbr_get_brand_markup()
 {
     return sprintf(
-        '<span class="qbr-brand-mark"><img src="%1$s" alt="%2$s"></span>',
-        esc_url(qbr_get_logo_url()),
-        esc_attr__('Quick Brake Repair logo', 'quick-brake-repair-theme')
+        '<div class="brand-mark" aria-hidden="true" style="background-image:url(\'%1$s\')"><span class="brand-mark__core"></span><span class="brand-mark__ring brand-mark__ring--one"></span><span class="brand-mark__ring brand-mark__ring--two"></span><span class="brand-mark__slice"></span></div>',
+        esc_url(qbr_get_logo_url())
     );
 }
 
@@ -62,32 +72,10 @@ function qbr_is_nav_active($slug)
     }
 
     if ('resources' === $slug) {
-        return is_page('resources') || is_home() || is_archive() || is_search() || is_singular('post');
+        return is_page('resources') || is_singular('post') || is_home() || is_archive() || is_search();
     }
 
     return is_page($slug);
-}
-
-/**
- * Output the fallback navigation menu.
- *
- * @return void
- */
-function qbr_render_fallback_navigation()
-{
-    foreach (qbr_get_navigation_items() as $item) {
-        $slug   = isset($item['slug']) ? (string) $item['slug'] : '';
-        $label  = isset($item['label']) ? (string) $item['label'] : qbr_slug_label($slug);
-        $active = qbr_is_nav_active($slug) ? ' is-active' : '';
-        $url    = qbr_get_mapped_permalink($slug, 'page');
-
-        printf(
-            '<a class="qbr-nav__link%1$s" href="%2$s">%3$s</a>',
-            esc_attr($active),
-            esc_url($url),
-            esc_html($label)
-        );
-    }
 }
 
 /**
@@ -97,21 +85,18 @@ function qbr_render_fallback_navigation()
  */
 function qbr_render_primary_navigation()
 {
-    if (has_nav_menu('primary')) {
-        wp_nav_menu(
-            array(
-                'theme_location' => 'primary',
-                'container'      => false,
-                'menu_class'     => 'qbr-nav__menu',
-                'fallback_cb'    => false,
-            )
-        );
-        return;
-    }
+    foreach (qbr_get_navigation_items() as $item) {
+        $slug   = isset($item['slug']) ? (string) $item['slug'] : '';
+        $label  = isset($item['label']) ? (string) $item['label'] : qbr_slug_label($slug);
+        $active = qbr_is_nav_active($slug) ? ' is-active' : '';
 
-    echo '<div class="qbr-nav__menu">';
-    qbr_render_fallback_navigation();
-    echo '</div>';
+        printf(
+            '<a class="site-nav__link%1$s" href="%2$s">%3$s</a>',
+            esc_attr($active),
+            esc_url(qbr_get_mapped_permalink($slug, 'page')),
+            esc_html($label)
+        );
+    }
 }
 
 /**
@@ -126,24 +111,23 @@ function qbr_render_hero_stats($stats)
         return;
     }
 
-    echo '<div class="qbr-hero__stats">';
+    echo '<div class="hero-stats">';
 
-    foreach ($stats as $stat) {
+    foreach ((array) $stats as $stat) {
         $value = isset($stat['value']) ? (string) $stat['value'] : '';
         $label = isset($stat['label']) ? (string) $stat['label'] : '';
 
-        printf(
-            '<div class="qbr-stat"><strong>%1$s</strong><span>%2$s</span></div>',
-            esc_html($value),
-            esc_html($label)
-        );
+        echo '<div class="hero-stat">';
+        echo '<strong>' . esc_html($value) . '</strong>';
+        echo '<span>' . esc_html($label) . '</span>';
+        echo '</div>';
     }
 
     echo '</div>';
 }
 
 /**
- * Get the shared phone number.
+ * Get the shared phone number or site value.
  *
  * @param string $key Data key.
  * @return string
@@ -156,23 +140,23 @@ function qbr_get_site_value($key)
 }
 
 /**
- * Render the shared service card used beside standard heroes.
+ * Render the shared hero support card for interior pages.
  *
  * @return void
  */
 function qbr_render_support_card()
 {
-    $site = qbr_get_site_data();
-
     ?>
-    <aside class="qbr-support-card">
-        <div class="qbr-support-card__logo"><?php echo wp_kses_post(qbr_get_brand_markup()); ?></div>
-        <p class="qbr-support-card__eyebrow"><?php esc_html_e('On-site diagnostics and repair', 'quick-brake-repair-theme'); ?></p>
-        <p class="qbr-support-card__copy"><?php esc_html_e('Brake pads, rotors, calipers, hoses, fluid service, and inspection support without the tow or waiting room.', 'quick-brake-repair-theme'); ?></p>
-        <dl class="qbr-support-card__facts">
+    <aside class="hero-card">
+        <?php echo wp_kses_post(qbr_get_brand_markup()); ?>
+        <div class="hero-card__copy">
+            <strong><?php esc_html_e('On-site diagnostics and repair', 'quick-brake-repair-theme'); ?></strong>
+            <p><?php esc_html_e('Brake pads, rotors, calipers, hoses, fluid service, and inspection support without the tow or waiting room.', 'quick-brake-repair-theme'); ?></p>
+        </div>
+        <dl class="hero-card__facts">
             <div>
                 <dt><?php esc_html_e('Coverage', 'quick-brake-repair-theme'); ?></dt>
-                <dd><?php echo esc_html(isset($site['serviceAreaLabel']) ? (string) $site['serviceAreaLabel'] : ''); ?></dd>
+                <dd><?php echo esc_html(qbr_get_site_value('serviceAreaLabel')); ?></dd>
             </div>
             <div>
                 <dt><?php esc_html_e('Hours', 'quick-brake-repair-theme'); ?></dt>
@@ -196,7 +180,7 @@ function qbr_render_support_card()
 function qbr_render_paragraphs($paragraphs)
 {
     foreach ((array) $paragraphs as $paragraph) {
-        printf('<p>%s</p>', esc_html((string) $paragraph));
+        echo '<p>' . esc_html((string) $paragraph) . '</p>';
     }
 }
 
@@ -212,17 +196,17 @@ function qbr_render_checklist($items)
         return;
     }
 
-    echo '<ul class="qbr-checklist">';
+    echo '<ul class="check-list">';
 
     foreach ((array) $items as $item) {
-        printf('<li>%s</li>', esc_html((string) $item));
+        echo '<li>' . esc_html((string) $item) . '</li>';
     }
 
     echo '</ul>';
 }
 
 /**
- * Render breadcrumb trail.
+ * Render breadcrumb trail matching the static site.
  *
  * @return void
  */
@@ -232,26 +216,8 @@ function qbr_render_breadcrumbs()
         return;
     }
 
-    $items   = array(
-        array(
-            'label' => __('Home', 'quick-brake-repair-theme'),
-            'url'   => home_url('/'),
-        ),
-    );
-    $mapped  = qbr_get_current_mapped_content();
-    $title   = wp_get_document_title();
-
-    if (is_singular('qbr_service_area')) {
-        $items[] = array(
-            'label' => __('Areas We Serve', 'quick-brake-repair-theme'),
-            'url'   => qbr_get_mapped_permalink('areas-we-serve', 'page'),
-        );
-    } elseif (is_singular('post') || is_home() || is_archive() || is_search()) {
-        $items[] = array(
-            'label' => __('Resources', 'quick-brake-repair-theme'),
-            'url'   => qbr_get_mapped_permalink('resources', 'page'),
-        );
-    }
+    $mapped = qbr_get_current_mapped_content();
+    $title  = wp_get_document_title();
 
     if (is_array($mapped) && ! empty($mapped['heroTitle'])) {
         $title = (string) $mapped['heroTitle'];
@@ -260,60 +226,47 @@ function qbr_render_breadcrumbs()
     } elseif (is_search()) {
         /* translators: %s search query */
         $title = sprintf(__('Search results for "%s"', 'quick-brake-repair-theme'), get_search_query());
+    } elseif (is_archive()) {
+        $title = get_the_archive_title();
     }
 
-    echo '<nav class="qbr-breadcrumbs" aria-label="' . esc_attr__('Breadcrumbs', 'quick-brake-repair-theme') . '">';
+    echo '<nav class="breadcrumbs shell" aria-label="' . esc_attr__('Breadcrumbs', 'quick-brake-repair-theme') . '">';
+    echo '<a href="' . esc_url(home_url('/')) . '">' . esc_html__('Home', 'quick-brake-repair-theme') . '</a>';
 
-    foreach ($items as $index => $item) {
-        if ($index > 0) {
-            echo '<span class="qbr-breadcrumbs__divider">/</span>';
-        }
-
-        printf(
-            '<a href="%1$s">%2$s</a>',
-            esc_url((string) $item['url']),
-            esc_html((string) $item['label'])
-        );
+    if (is_singular('qbr_service_area')) {
+        echo '<span>/</span><span>' . esc_html__('Service Area', 'quick-brake-repair-theme') . '</span>';
     }
 
-    echo '<span class="qbr-breadcrumbs__divider">/</span>';
-    echo '<span>' . esc_html($title) . '</span>';
+    echo '<span>/</span><span>' . esc_html($title) . '</span>';
     echo '</nav>';
 }
 
 /**
- * Render page heading group.
+ * Render the standard interior hero.
  *
- * @param string      $eyebrow Eyebrow text.
- * @param string      $title Title text.
- * @param string      $summary Summary text.
- * @param array<int, array<string, string>> $stats Hero stats.
- * @param bool        $home Whether this is the homepage.
+ * @param string                            $eyebrow Ignored to preserve literal static structure.
+ * @param string                            $title   Hero title.
+ * @param string                            $summary Hero summary.
+ * @param array<int, array<string, string>> $stats   Hero stats.
+ * @param bool                              $home    Whether this is the homepage.
  * @return void
  */
 function qbr_render_page_hero($eyebrow, $title, $summary, $stats = array(), $home = false)
 {
     $site = qbr_get_site_data();
+
+    if ($home) {
+        return;
+    }
     ?>
-    <section class="qbr-hero<?php echo $home ? ' qbr-hero--home' : ''; ?>">
-        <?php if ($home) : ?>
-            <div class="qbr-hero__media" aria-hidden="true">
-                <video class="qbr-hero__video" autoplay muted loop playsinline poster="<?php echo esc_url(get_theme_file_uri('/assets/images/hero-poster.jpg')); ?>">
-                    <source src="<?php echo esc_url(get_theme_file_uri('/assets/images/hero-loop.mp4')); ?>" type="video/mp4">
-                </video>
-                <div class="qbr-hero__overlay"></div>
-            </div>
-        <?php endif; ?>
-        <div class="qbr-shell qbr-hero__grid">
-            <div class="qbr-hero__content">
-                <?php if ($eyebrow) : ?>
-                    <p class="qbr-eyebrow"><?php echo esc_html($eyebrow); ?></p>
-                <?php endif; ?>
+    <section class="hero">
+        <div class="shell hero__grid">
+            <div class="hero__content">
                 <h1><?php echo esc_html($title); ?></h1>
-                <p class="qbr-hero__summary"><?php echo esc_html($summary); ?></p>
-                <div class="qbr-hero__actions">
-                    <a class="qbr-button qbr-button--primary" href="<?php echo esc_url(isset($site['phoneHref']) ? (string) $site['phoneHref'] : '#'); ?>"><?php esc_html_e('Call Now', 'quick-brake-repair-theme'); ?></a>
-                    <a class="qbr-button qbr-button--secondary" href="<?php echo esc_url(qbr_get_mapped_permalink('contact', 'page')); ?>"><?php esc_html_e('Free Quote', 'quick-brake-repair-theme'); ?></a>
+                <p class="hero__summary"><?php echo esc_html($summary); ?></p>
+                <div class="hero__actions">
+                    <a class="button button--primary" href="<?php echo esc_url(isset($site['phoneHref']) ? (string) $site['phoneHref'] : '#'); ?>"><?php esc_html_e('Call Now', 'quick-brake-repair-theme'); ?></a>
+                    <a class="button button--secondary" href="<?php echo esc_url(qbr_get_mapped_permalink('contact', 'page')); ?>"><?php esc_html_e('Free Quote', 'quick-brake-repair-theme'); ?></a>
                 </div>
                 <?php qbr_render_hero_stats($stats); ?>
             </div>
@@ -324,27 +277,27 @@ function qbr_render_page_hero($eyebrow, $title, $summary, $stats = array(), $hom
 }
 
 /**
- * Render section intro content.
+ * Render a generic content section.
  *
- * @param string      $heading Heading text.
+ * @param string      $heading    Heading text.
  * @param array<int, string> $paragraphs Paragraphs.
  * @param string      $extra_class Additional class.
  * @return void
  */
 function qbr_render_text_section($heading, $paragraphs, $extra_class = '')
 {
-    $class_name = 'qbr-section';
+    $class_name = 'content-section shell';
 
     if ($extra_class) {
         $class_name .= ' ' . $extra_class;
     }
     ?>
     <section class="<?php echo esc_attr($class_name); ?>">
-        <div class="qbr-shell qbr-section__grid">
-            <div class="qbr-section__heading">
+        <div class="section-layout">
+            <div class="section-heading">
                 <h2><?php echo esc_html($heading); ?></h2>
             </div>
-            <div class="qbr-rich-text">
+            <div class="content-stack">
                 <?php qbr_render_paragraphs($paragraphs); ?>
             </div>
         </div>
@@ -363,12 +316,12 @@ function qbr_get_service_area_card_items()
 
     foreach (qbr_get_service_area_pages() as $page) {
         $items[] = array(
-            'title'       => isset($page['heroTitle']) ? (string) $page['heroTitle'] : '',
-            'summary'     => isset($page['heroSummary']) ? (string) $page['heroSummary'] : '',
-            'description' => isset($page['metaDescription']) ? (string) $page['metaDescription'] : '',
-            'url'         => qbr_get_mapped_permalink((string) $page['slug'], 'service_area'),
-            'eyebrow'     => isset($page['eyebrow']) ? (string) $page['eyebrow'] : '',
-            'label'       => isset($page['title']) ? (string) $page['title'] : '',
+            'title'           => isset($page['heroTitle']) ? (string) $page['heroTitle'] : '',
+            'heroSummary'     => isset($page['heroSummary']) ? (string) $page['heroSummary'] : '',
+            'metaDescription' => isset($page['metaDescription']) ? (string) $page['metaDescription'] : '',
+            'url'             => qbr_get_mapped_permalink((string) $page['slug'], 'service_area'),
+            'eyebrow'         => isset($page['eyebrow']) ? (string) $page['eyebrow'] : '',
+            'label'           => isset($page['title']) ? (string) $page['title'] : '',
         );
     }
 
@@ -387,11 +340,11 @@ function qbr_get_article_card_items($limit = 0)
 
     foreach (qbr_get_article_pages() as $article) {
         $items[] = array(
-            'title'       => isset($article['title']) ? (string) $article['title'] : '',
-            'summary'     => isset($article['metaDescription']) ? (string) $article['metaDescription'] : '',
-            'description' => isset($article['heroSummary']) ? (string) $article['heroSummary'] : '',
-            'url'         => qbr_get_mapped_permalink((string) $article['slug'], 'post'),
-            'eyebrow'     => isset($article['publishedLabel']) ? (string) $article['publishedLabel'] : '',
+            'title'           => isset($article['title']) ? (string) $article['title'] : '',
+            'heroSummary'     => isset($article['heroSummary']) ? (string) $article['heroSummary'] : '',
+            'metaDescription' => isset($article['metaDescription']) ? (string) $article['metaDescription'] : '',
+            'url'             => qbr_get_mapped_permalink((string) $article['slug'], 'post'),
+            'eyebrow'         => isset($article['publishedLabel']) ? (string) $article['publishedLabel'] : '',
         );
 
         if ($limit > 0 && count($items) >= $limit) {
@@ -403,16 +356,16 @@ function qbr_get_article_card_items($limit = 0)
 }
 
 /**
- * Render card grid.
+ * Render a generic card grid in the ported visual language.
  *
- * @param array<int, array<string, string>> $items Card items.
+ * @param array<int, array<string, string>> $items      Card items.
  * @param string                            $link_label Link label.
- * @param string                            $modifier Grid class modifier.
+ * @param string                            $modifier   Additional grid class.
  * @return void
  */
 function qbr_render_card_grid($items, $link_label, $modifier = '')
 {
-    $class_name = 'qbr-card-grid';
+    $class_name = 'card-grid card-grid--three';
 
     if ($modifier) {
         $class_name .= ' ' . $modifier;
@@ -421,21 +374,21 @@ function qbr_render_card_grid($items, $link_label, $modifier = '')
     echo '<div class="' . esc_attr($class_name) . '">';
 
     foreach ((array) $items as $item) {
-        echo '<article class="qbr-card">';
+        echo '<article class="card card--resource">';
 
         if (! empty($item['eyebrow'])) {
-            echo '<p class="qbr-card__eyebrow">' . esc_html((string) $item['eyebrow']) . '</p>';
+            echo '<p class="card__meta">' . esc_html((string) $item['eyebrow']) . '</p>';
         }
 
         echo '<h3>' . esc_html((string) $item['title']) . '</h3>';
 
-        if (! empty($item['summary'])) {
-            echo '<p>' . esc_html((string) $item['summary']) . '</p>';
-        } elseif (! empty($item['description'])) {
-            echo '<p>' . esc_html((string) $item['description']) . '</p>';
+        if (! empty($item['metaDescription'])) {
+            echo '<p>' . esc_html((string) $item['metaDescription']) . '</p>';
+        } elseif (! empty($item['heroSummary'])) {
+            echo '<p>' . esc_html((string) $item['heroSummary']) . '</p>';
         }
 
-        echo '<a class="qbr-text-link" href="' . esc_url((string) $item['url']) . '">' . esc_html($link_label) . '</a>';
+        echo '<a class="text-link" href="' . esc_url((string) $item['url']) . '">' . esc_html($link_label) . '</a>';
         echo '</article>';
     }
 
@@ -454,13 +407,13 @@ function qbr_render_faq_items($items)
         return;
     }
 
-    echo '<div class="qbr-faq">';
+    echo '<div class="faq-list">';
 
     foreach ((array) $items as $item) {
         $question = isset($item['question']) ? (string) $item['question'] : '';
         $answer   = isset($item['answer']) ? (string) $item['answer'] : '';
 
-        echo '<details class="qbr-faq__item">';
+        echo '<details class="faq-item">';
         echo '<summary>' . esc_html($question) . '</summary>';
         echo '<p>' . esc_html($answer) . '</p>';
         echo '</details>';
@@ -470,7 +423,7 @@ function qbr_render_faq_items($items)
 }
 
 /**
- * Render a compact CTA band.
+ * Render a compact CTA band in the static card language.
  *
  * @param string $heading Heading text.
  * @param string $summary Summary text.
@@ -479,19 +432,18 @@ function qbr_render_faq_items($items)
 function qbr_render_cta_band($heading, $summary)
 {
     ?>
-    <section class="qbr-cta-band">
-        <div class="qbr-shell qbr-cta-band__grid">
-            <div>
-                <p class="qbr-eyebrow"><?php esc_html_e('Quick Brake Repair', 'quick-brake-repair-theme'); ?></p>
+    <section class="panel shell">
+        <div class="split-grid">
+            <article class="card">
                 <h2><?php echo esc_html($heading); ?></h2>
                 <p><?php echo esc_html($summary); ?></p>
-            </div>
-            <div class="qbr-cta-band__actions">
-                <a class="qbr-button qbr-button--primary" href="<?php echo esc_url(qbr_get_site_value('phoneHref')); ?>"><?php echo esc_html(sprintf(__('Call %s', 'quick-brake-repair-theme'), qbr_get_site_value('phoneDisplay'))); ?></a>
-                <a class="qbr-button qbr-button--secondary" href="<?php echo esc_url(qbr_get_mapped_permalink('contact', 'page')); ?>"><?php esc_html_e('Request a Quote', 'quick-brake-repair-theme'); ?></a>
-            </div>
+            </article>
+            <article class="card">
+                <h2><?php esc_html_e('Talk to Quick Brake Repair', 'quick-brake-repair-theme'); ?></h2>
+                <p><?php esc_html_e('Call first for a quote, then confirm the service path that fits your vehicle symptoms and schedule.', 'quick-brake-repair-theme'); ?></p>
+                <a class="button button--primary" href="<?php echo esc_url(qbr_get_site_value('phoneHref')); ?>"><?php echo esc_html(sprintf(__('Call %s', 'quick-brake-repair-theme'), qbr_get_site_value('phoneDisplay'))); ?></a>
+            </article>
         </div>
     </section>
     <?php
 }
-

@@ -20,7 +20,7 @@ function qbr_enqueue_assets()
 
     wp_enqueue_style(
         'qbr-fonts',
-        'https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap',
+        'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap',
         array(),
         null
     );
@@ -45,4 +45,3 @@ function qbr_enqueue_assets()
     }
 }
 add_action('wp_enqueue_scripts', 'qbr_enqueue_assets');
-

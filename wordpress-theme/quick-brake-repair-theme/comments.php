@@ -9,8 +9,8 @@ if (post_password_required()) {
     return;
 }
 ?>
-<section class="qbr-section qbr-section--comments">
-    <div class="qbr-shell">
+<section class="content-section shell">
+    <div class="content-stack">
         <?php if (have_comments()) : ?>
             <h2><?php esc_html_e('Comments', 'quick-brake-repair-theme'); ?></h2>
             <ol class="comment-list">
@@ -21,4 +21,3 @@ if (post_password_required()) {
         <?php comment_form(); ?>
     </div>
 </section>
-

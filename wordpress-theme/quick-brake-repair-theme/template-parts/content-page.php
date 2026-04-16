@@ -9,7 +9,7 @@ $page = isset($args['page']) && is_array($args['page']) ? $args['page'] : null;
 
 if (is_array($page)) {
     qbr_render_page_hero(
-        isset($page['eyebrow']) ? (string) $page['eyebrow'] : '',
+        '',
         isset($page['heroTitle']) ? (string) $page['heroTitle'] : get_the_title(),
         isset($page['heroSummary']) ? (string) $page['heroSummary'] : ''
     );
@@ -19,26 +19,11 @@ if (is_array($page)) {
 ?>
 <?php if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
-        <article <?php post_class('qbr-entry'); ?>>
-            <section class="qbr-hero qbr-hero--simple">
-                <div class="qbr-shell qbr-hero__grid qbr-hero__grid--simple">
-                    <div class="qbr-hero__content">
-                        <p class="qbr-eyebrow"><?php esc_html_e('Page', 'quick-brake-repair-theme'); ?></p>
-                        <h1><?php the_title(); ?></h1>
-                        <?php if (has_excerpt()) : ?>
-                            <p class="qbr-hero__summary"><?php echo esc_html(get_the_excerpt()); ?></p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </section>
-            <section class="qbr-section">
-                <div class="qbr-shell">
-                    <div class="qbr-rich-text qbr-rich-text--narrow">
-                        <?php the_content(); ?>
-                    </div>
-                </div>
-            </section>
-        </article>
+        <?php qbr_render_page_hero('', get_the_title(), has_excerpt() ? get_the_excerpt() : ''); ?>
+        <section class="content-section shell">
+            <div class="content-stack">
+                <?php the_content(); ?>
+            </div>
+        </section>
     <?php endwhile; ?>
 <?php endif; ?>
-
