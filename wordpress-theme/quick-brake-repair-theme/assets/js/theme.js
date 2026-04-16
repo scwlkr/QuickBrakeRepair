@@ -241,8 +241,9 @@ const initializeRevealMotion = () => {
     ".article-sidebar",
     ".contact-intro__copy",
     ".contact-intro__media",
-    ".site-footer__grid > section",
-    ".site-footer__meta",
+    ".site-footer__cta",
+    ".site-footer__column",
+    ".site-footer__bottom",
   ];
   const revealVariants = ["up", "up-soft", "left", "right", "scale"];
   const seenTargets = new Set();

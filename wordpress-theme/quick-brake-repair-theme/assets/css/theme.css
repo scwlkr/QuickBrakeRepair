@@ -476,8 +476,7 @@ body.has-open-nav .call-pill {
 
 h1,
 h2,
-h3,
-.footer-title {
+h3 {
   margin: 0;
   font-family: "Sora", sans-serif;
   letter-spacing: -0.05em;
@@ -746,7 +745,6 @@ textarea {
 .card p,
 .content-stack p,
 .article-copy p,
-.footer-copy,
 .contact-note,
 .article-sidebar p {
   margin: 0;
@@ -980,8 +978,7 @@ textarea {
   gap: 0.28rem;
 }
 
-.contact-list strong,
-.footer-list-title {
+.contact-list strong {
   font-family: "Sora", sans-serif;
   letter-spacing: -0.03em;
 }
@@ -1072,57 +1069,211 @@ textarea {
 }
 
 .site-footer {
-  padding: 3.75rem 0 4.5rem;
+  padding: clamp(4rem, 6vw, 5.5rem) 0 2rem;
   color: rgba(255, 255, 255, 0.76);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
   background:
-    radial-gradient(circle at top right, rgba(78, 136, 255, 0.22), transparent 20%),
+    radial-gradient(circle at 12% 0%, rgba(78, 136, 255, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(78, 136, 255, 0.18), transparent 20%),
     linear-gradient(180deg, #09172d 0%, #061122 100%);
 }
 
-.site-footer__grid {
+.site-footer__inner {
   display: grid;
-  grid-template-columns: 1.45fr repeat(3, minmax(0, 1fr));
-  gap: 1.4rem;
+  gap: clamp(2.4rem, 4vw, 3.5rem);
 }
 
-.site-footer__grid > section {
+.site-footer__cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) auto;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  padding-bottom: clamp(2.2rem, 4vw, 3rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.site-footer__cta-content {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 36rem;
+}
+
+.site-footer__cta-title {
+  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+  color: var(--white);
+}
+
+.site-footer__cta-copy {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.72;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.site-footer__cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-self: end;
+  gap: 0.9rem 1.15rem;
+}
+
+.site-footer__cta-actions .button {
+  white-space: nowrap;
+}
+
+.site-footer__cta-link {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 800;
+  transition: color var(--transition-fast);
+}
+
+.site-footer__cta-link:hover {
+  color: var(--white);
+}
+
+.site-footer__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) repeat(4, minmax(0, 1fr));
+  gap: clamp(1.6rem, 2.6vw, 2.9rem);
+  align-items: start;
+}
+
+.site-footer__column {
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: 0.95rem;
   min-width: 0;
 }
 
-.footer-title {
-  max-width: 11ch;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  color: var(--white);
+.site-footer__column--brand {
+  max-width: 23rem;
 }
 
-.footer-list-title {
+.site-footer__heading {
   margin: 0;
-  font-size: 1.45rem;
-  line-height: 1.08;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.site-footer__brand-name {
+  margin: 0;
+  font-family: "Sora", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: -0.03em;
   color: var(--white);
 }
 
-.footer-copy,
-.site-footer__meta {
-  color: rgba(255, 255, 255, 0.68);
+.site-footer__body-copy {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.footer-list a:hover,
+.site-footer__list,
+.site-footer__contact-list,
+.site-footer__bottom-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer__list {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.site-footer__list a,
+.site-footer__contact-value,
+.site-footer__bottom-links a {
+  color: rgba(255, 255, 255, 0.82);
+  transition: color var(--transition-fast);
+}
+
+.site-footer__list a {
+  display: inline-block;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.site-footer__list a:hover,
+.site-footer__contact-value:hover,
+.site-footer__bottom-links a:hover,
 .contact-list a:hover {
   color: var(--white);
 }
 
-.site-footer__meta {
+.site-footer__list--static li {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.55;
+}
+
+.site-footer__contact-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.site-footer__contact-list li {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.site-footer__meta-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.site-footer__contact-value {
+  display: inline-block;
+  font-style: normal;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.site-footer__hours {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.site-footer__hours-note {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.site-footer__bottom {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: center;
+  gap: 1rem 1.5rem;
   flex-wrap: wrap;
-  margin-top: 2rem;
-  padding-top: 1.3rem;
+  padding-top: 1.4rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.site-footer__copyright {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.92rem;
+}
+
+.site-footer__bottom-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.15rem;
+}
+
+.site-footer__bottom-links a {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .floating-call {
@@ -2305,7 +2456,6 @@ textarea {
 
   .hero__layout,
   .hero__grid,
-  .site-footer__grid,
   .section-layout,
   .page-home .section-layout--intro-visual,
   .page-contact .hero__grid,
@@ -2402,6 +2552,25 @@ textarea {
 
   .testimonial--lead {
     grid-column: auto;
+  }
+}
+
+@media (max-width: 1120px) {
+  .site-footer__cta {
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__cta-actions {
+    justify-self: start;
+  }
+
+  .site-footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__column--brand {
+    grid-column: 1 / -1;
+    max-width: none;
   }
 }
 
@@ -2505,10 +2674,6 @@ textarea {
     padding-right: 0;
   }
 
-  .site-footer__grid {
-    grid-template-columns: 1fr;
-  }
-
   .page-home .section--reviews {
     margin-top: 1rem;
     padding: 1.45rem;
@@ -2535,6 +2700,41 @@ textarea {
 
   .hero__actions {
     display: grid;
+  }
+
+  .site-footer {
+    padding-top: 3.5rem;
+  }
+
+  .site-footer__inner {
+    gap: 2rem;
+  }
+
+  .site-footer__cta {
+    gap: 1.15rem;
+    padding-bottom: 1.8rem;
+  }
+
+  .site-footer__cta-actions {
+    display: grid;
+    width: 100%;
+  }
+
+  .site-footer__cta-link {
+    justify-self: start;
+  }
+
+  .site-footer__main {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .site-footer__bottom {
+    align-items: start;
+  }
+
+  .site-footer__bottom-links {
+    justify-content: flex-start;
   }
 
   .content-section,
