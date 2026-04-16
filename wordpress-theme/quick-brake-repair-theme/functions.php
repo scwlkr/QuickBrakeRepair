@@ -11,8 +11,8 @@ if (! defined('ABSPATH')) {
 
 require_once get_theme_file_path('/inc/content-map.php');
 require_once get_theme_file_path('/inc/theme-support.php');
+require_once get_theme_file_path('/inc/bootstrap.php');
 require_once get_theme_file_path('/inc/setup.php');
 require_once get_theme_file_path('/inc/enqueue.php');
 require_once get_theme_file_path('/inc/template-tags.php');
 require_once get_theme_file_path('/inc/seo.php');
-
